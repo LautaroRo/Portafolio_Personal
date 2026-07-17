@@ -1,0 +1,22 @@
+.switch-btn {
+  position: fixed;        /* Lo fija en la pantalla */
+  bottom: 120px;           /* Distancia desde abajo */
+  left: 20px;             /* Distancia desde la izquierda */
+  z-index: 9999;          /* Asegura que siempre esté arriba de todo */
+  background: #1a1a1a;
+  color: #fff;
+  border: 1px solid #333;
+  padding: 10px 20px;
+  border-radius: 50px;    /* Forma redondeada */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.switch-btn:hover {
+  transform: scale(1.05);
+  border-color: #777;
+}

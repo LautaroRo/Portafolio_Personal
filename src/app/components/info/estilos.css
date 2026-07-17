@@ -1,0 +1,79 @@
+.info-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Centrado vertical restando el alto aproximado de la navbar */
+  min-height: calc(100vh - 180px); 
+  padding: 40px 20px;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 600px;
+}
+
+.profile-img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 30px;
+  border: 2px solid #333;
+  transition: transform 0.3s ease;
+}
+
+.profile-img:hover {
+  transform: scale(1.05); /* Un pequeño efecto profesional al pasar el mouse */
+}
+
+.info-content h1 {
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+  color: #fff;
+  letter-spacing: -1px;
+}
+
+.info-content p {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #a0a0a0;
+  font-weight: 300;
+}
+
+/* --- Ajustes para pantallas pequeñas (Móviles) --- */
+@media (max-width: 768px) {
+  .info-section {
+    /* Reducimos el padding en móviles para ganar espacio horizontal */
+    padding: 20px 15px;
+    min-height: auto; /* Quitamos la restricción de altura en móviles */
+    margin-top: 20px;
+  }
+
+  .profile-img {
+    /* Achicamos un poco la imagen para que no domine toda la pantalla */
+    width: 140px;
+    height: 140px;
+    margin-bottom: 20px;
+  }
+
+  .info-content h1 {
+    /* Ajustamos el tamaño del nombre para que no se corte */
+    font-size: 2rem;
+  }
+
+  .info-content p {
+    /* Ajustamos la fuente para mejorar la legibilidad en pantallas pequeñas */
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+
+/* --- Ajustes para pantallas muy pequeñas (Opcional) --- */
+@media (max-width: 480px) {
+  .info-content h1 {
+    font-size: 1.6rem;
+  }
+}

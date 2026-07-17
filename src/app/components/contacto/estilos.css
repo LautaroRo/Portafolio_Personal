@@ -1,0 +1,122 @@
+.contacto-section {
+  padding: 60px 20px;
+  max-width: 500px; /* Tamaño justo para un formulario web */
+  margin: 0 auto;
+  color: #fff;
+}
+
+.contacto-section h2 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.contact-form label {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.contact-form input, 
+.contact-form textarea {
+  padding: 12px;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  transition: border 0.3s;
+}
+
+.contact-form input:focus, 
+.contact-form textarea:focus {
+  border-color: #777;
+  outline: none;
+}
+
+.btn-enviar {
+  padding: 14px;
+  background: #1a1a1a; /* Fondo oscuro inicial */
+  color: #fff; /* Texto blanco para contraste */
+  border: 1px solid #333; /* Borde sutil */
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease; /* Suaviza el cambio */
+}
+
+/* Cuando pasas el mouse por encima */
+.btn-enviar:hover {
+  background: #2a2a2a; /* Se aclara un poco */
+  border-color: #555;
+}
+
+/* Cuando lo presionas (el "click") */
+.btn-enviar:active {
+  background: #333; /* Se aclara un poquito más al hacer click */
+  transform: scale(0.98); /* Un efecto de presión sutil */
+}
+
+/* Estilo para el botón de WhatsApp */
+.whatsapp-container {
+  text-align: center;
+  border-top: 1px solid #333;
+  padding-top: 30px;
+}
+
+.btn-whatsapp {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 25px;
+  background: #25D366;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.btn-whatsapp:hover {
+  transform: scale(1.05);
+}
+
+
+/* --- Ajustes Responsive para Contacto (768px) --- */
+@media (max-width: 768px) {
+  .contacto-section {
+    padding: 40px 20px;
+    width: 85%;
+  }
+
+  .contacto-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .contact-form {
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+
+  .contact-form input, 
+  .contact-form textarea {
+    padding: 14px; /* Un poco más de altura para mejor usabilidad táctil */
+    font-size: 16px; /* Evita que el navegador haga zoom al enfocar en iOS */
+  }
+
+  .btn-enviar {
+    padding: 16px; /* Botón más grande para facilitar el toque */
+  }
+
+  .btn-whatsapp {
+    width: 100%; /* Botón de ancho completo en móvil */
+    padding: 14px;
+    box-sizing: border-box; /* Asegura que el padding no desborde el ancho */
+  }
+}

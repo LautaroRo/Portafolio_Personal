@@ -1,0 +1,29 @@
+.scroll-indicator {
+  position: fixed;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1000;
+}
+
+.line {
+  width: 2px;
+  height: 30px; /* Tamaño de la linita */
+  background-color: #333; /* Color inactivo */
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.line.active {
+  background-color: #fff; /* Color activo */
+  height: 60px; /* Se estira cuando es la sección actual */
+}
+
+@media (max-width: 700px){
+.scroll-indicator{
+  right: 10px;
+}
+}

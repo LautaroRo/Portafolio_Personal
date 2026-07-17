@@ -1,0 +1,86 @@
+.habilidades-container {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.habilidades-container h2 {
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.skill-item {
+  padding: 15px 30px;
+  /* Usamos variables CSS para que el "tema" (Omnitrix) pueda controlarlo */
+  background: var(--bg-card, #1a1a1a);
+  border: 1px solid #333;
+  color: #fff;
+  border-radius: 8px;
+  cursor: default;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.skill-item:hover {
+  /* Al pasar el mouse, brilla con el color del tema actual */
+  border-color: var(--accent-color, #fff);
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+}
+
+/* src/app/components/habilidades/estilos.css */
+/* src/app/components/habilidades/estilos.css */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 800px;
+  margin: 40px auto;
+}
+
+.skill-item {
+  padding: 12px 25px;
+  background: rgba(255, 255, 255, 0.03); /* Casi transparente */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px; /* Forma de píldora abstracta */
+  color: #fff;
+  cursor: grab;
+  transition: transform 0.2s ease, background 0.3s;
+  backdrop-filter: blur(5px); /* Efecto cristal */
+}
+
+/* Efecto al arrastrar */
+.skill-item:active {
+  cursor: grabbing;
+  background: var(--accent-color, rgba(255, 255, 255, 0.1));
+  transform: scale(1.1); /* Crece al tomarlo */
+}
+
+/* --- Ajustes Responsive: Solo se aplica en pantallas pequeñas --- */
+@media (max-width: 768px) {
+
+  .habilidades-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+  }
+
+  .grid {
+    gap: 10px;
+    margin: 20px auto;
+  }
+
+  .skill-item {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+}

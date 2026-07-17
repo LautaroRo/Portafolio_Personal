@@ -1,0 +1,40 @@
+.radioContainer { position: fixed;     bottom: 190px;
+    left: 21px; z-index: 9999; }
+/* Esto iguala tu botón de radio al estilo de tu switch-btn */
+.triggerButton {
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 1px solid #555;
+  cursor: pointer;
+  padding: 18px; /* Ajustá esto para que tenga el mismo tamaño */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      border-radius: 70px;
+}
+
+.triggerButton:hover {
+  background-color: #333;
+}
+.playerWindow { background: #121212; padding: 15px; width: 280px; border: 2px solid #333; color: white; font-family: sans-serif; }
+.header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 12px; }
+.progressBarContainer {
+  width: 100%;
+  height: 4px;
+  background-color: #333;
+  margin: 10px 0;
+  border-radius: 2px;
+}
+
+.progressBar {
+  height: 100%;
+  background-color: #1db954; /* El verde de Spotify */
+  width: 0%; /* Inicia en 0 */
+  transition: width 0.2s linear; /* Movimiento suave */
+}
+.trackList { display: flex; flex-direction: column; gap: 5px; }
+.trackItem { display: flex; justify-content: space-between; align-items: center; background: #252525; padding: 6px; }
+.trackTitle { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 150px; }
+.playButton { background: none; border: none; color: white; cursor: pointer; }

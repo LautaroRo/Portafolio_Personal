@@ -1,0 +1,223 @@
+.proyectos-container {
+  padding: 80px 20px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.proyectos-wrapper {
+  max-width: 1000px;
+  width: 100%;
+}
+
+.proyectos-wrapper h2 {
+  margin-bottom: 30px;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+
+h2{
+        color: rgb(255, 255, 255);
+    margin-bottom: 40px;
+    font-size: 2rem;
+}
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  background: #111;
+  border: 1px solid #333;
+  padding: 25px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover:not(.locked) {
+  border-color: #fff;
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+}
+
+.project-card.locked {
+  border-style: dashed;
+  opacity: 0.6;
+  cursor: default;
+  flex-direction: column-reverse;
+}
+
+.description {
+  color: #888;
+  margin: 15px 0;
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+.tags-container {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.tag {
+  background: #222;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.lock-icon {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: #333;
+}
+
+.project-image {
+  width: 100%;
+  height: 150px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+/* Ajustamos el contenido para que no se vea desordenado con la imagen */
+.project-image {
+  width: 100%;
+  height: 180px; /* Un poco más de altura para que respire */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #050505; /* Un negro apenas más suave que el fondo total */
+  margin-bottom: 20px;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cambiamos a 'cover' para que ocupe todo el espacio y se vea grande */
+  object-position: top; /* Ajustamos para que enfoque la parte superior de tu diseño */
+}
+
+.project-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px; /* Separación de los tags */
+}
+
+.btn-small {
+  padding: 5px 12px;
+  background: #222;
+  border: 1px solid #444;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.btn-small:hover {
+  background: #333;
+  border-color: #666;
+}
+
+/* Asegurar que las tarjetas no se estiren */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Deja que el contenido dicte el alto o usa una altura mínima */
+}
+
+.project-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: auto; /* Mantiene los botones siempre abajo */
+  padding-top: 20px;
+}
+
+.btn-action {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.03); /* Fondo muy sutil */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Borde elegante */
+  color: #fff;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-action:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+
+/* --- Ajustes Responsive: Proyectos más compactos en móviles --- */
+@media (max-width: 768px) {
+
+  h2{
+    text-align: center;
+  }
+  .project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  /* Cambia 'top' por 'center' para que la imagen se vea centrada */
+  object-position: center; 
+}
+  .bento-grid {
+        gap: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+  }
+
+  .project-card {
+    padding: 15px; /* Reducimos padding interno */
+    width: 80%;
+  }
+
+  .project-image {
+    height: 120px; /* Reducimos altura de la imagen en móvil */
+    margin-bottom: 12px;
+  }
+
+  .card-content h3 {
+    font-size: 1.1rem; /* Título un poco más chico */
+  }
+
+  .description {
+    font-size: 0.85rem; /* Descripción más pequeña */
+    margin: 10px 0;
+  }
+
+  .btn-action {
+    padding: 8px; /* Botones más compactos */
+    font-size: 0.8rem;
+  }
+}
