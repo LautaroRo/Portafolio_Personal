@@ -3,10 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 // Providers
-import { SoundtrackProvider } from "./../context/soundtrack/index.tsx"; 
-import { ThemeProvider } from "./../context/tema/index.tsx";
-import Radio from "./../context/radio/index.tsx";
-import BackgroundVideo from "./components/background/index.tsx";
+import { SoundtrackProvider } from "../context/soundtrack";
+import { ThemeProvider } from "../context/tema";
+import Radio from "../context/radio";
+import BackgroundVideo from "./components/background";
 import ClickSoundProvider from "./components/clicksound";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });

@@ -1,14 +1,14 @@
 "use client";
 
 // Usando el alias @/components y quitando la extensión .js/.tsx
-import Navbar from "./components/navbar/index.tsx";
-import Info from "./components/info/index.tsx";
-import NavGuia from "./components/navguia/intex.tsx"; // Asegúrate de que el archivo se llame index.tsx/jsx
-import Habilidades from "./components/habilidades/index.tsx";
-import Proyectos from "./components/proyectos/index.tsx";
-import Contacto from "./components/contacto/index.tsx";
-import Switch from "./../context/switch/index.tsx";
-import Radio from "./../context/radio/index.tsx";
+import Navbar from "./components/navbar";
+import Info from "./components/info";
+import NavGuia from "./components/navguia"; 
+import Habilidades from "./components/habilidades";
+import Proyectos from "./components/proyectos";
+import Contacto from "./components/contacto";
+import Switch from "./../context/switch";
+import Radio from "./../context/radio";
 
 export default function MainPage() {
   return (
