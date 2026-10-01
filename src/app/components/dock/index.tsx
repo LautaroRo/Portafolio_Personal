@@ -72,7 +72,10 @@ export default function Dock() {
   const VolumenIcono = radio.volume === 0 ? VolumeX : radio.volume < 0.5 ? Volume1 : Volume2;
 
   return (
-    <div className="dock" ref={rootRef}>
+    <div className={`dock ${panelVisible ? "has-panel" : ""}`} ref={rootRef}>
+      {/* En el celular los paneles son hojas que suben desde abajo: el velo cierra al tocar afuera */}
+      {panelVisible && <div className="dock-backdrop" onClick={() => setPanel(null)} aria-hidden />}
+
       {panelVisible === "mundos" && (
         <div className="dock-panel dock-mundos" role="dialog" aria-label="Elegí un mundo">
           <div className="dock-panel-head">

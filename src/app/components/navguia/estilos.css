@@ -95,3 +95,10 @@
     display: none;
   }
 }
+
+/* En el celular las líneas laterales pisaban el texto: ahí alcanza con la navbar */
+@media (max-width: 600px) {
+  .scroll-indicator {
+    display: none;
+  }
+}

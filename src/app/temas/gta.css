@@ -445,17 +445,29 @@ body.gta-mode .page-shell {
     padding-top: 70px;
   }
 
+  /* En el celular el HUD es una pastilla compacta: estrellas y plata en una fila */
   .gta-hud {
-    top: 12px;
-    right: 14px;
+    top: 10px;
+    right: 10px;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(26, 8, 54, 0.7);
+    backdrop-filter: blur(8px);
   }
 
   .gta-money {
-    font-size: 1.4rem;
+    font-size: 1.05rem;
+  }
+
+  .gta-stars {
+    gap: 2px;
   }
 
   .gta-stars i {
-    width: 15px;
-    height: 15px;
+    width: 11px;
+    height: 11px;
   }
 }
