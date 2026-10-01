@@ -29,7 +29,7 @@ const PROYECTOS: Proyecto[] = [
     desc: "Sistema integral para la gestión de turnos de barbería.",
     tags: ["Next.js", "Mongoose", "Node.js", "MongoDB", "TypeScript"],
     imagen: "/proyectos/peluqueria-one.png",
-    linkWeb: "https://peluqueria-one-lautaroros-projects.vercel.app/",
+    linkWeb: "https://peluqueria-one-weld.vercel.app/",
     linkGit: "https://github.com/LautaroRo/Peluqueria-ONE",
   },
 ];
