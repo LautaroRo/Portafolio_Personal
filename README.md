@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portafolio personal — Lautaro Rodríguez
 
-## Getting Started
+Portafolio web hecho con **Next.js 16**, **React 19** y **TypeScript**.
 
-First, run the development server:
+Además del modo normal tiene temas inspirados en videojuegos (Minecraft, Silent Hill 2, The Last of Us y Red Dead Redemption 2): cada uno cambia el video de fondo, la tipografía, el sonido de los botones y trae una radio con su banda sonora. El tema elegido queda guardado en el navegador.
+
+## Secciones
+
+- **Información**: presentación con animaciones de entrada.
+- **Habilidades**: inventario que se puede reordenar arrastrando (dnd-kit, también con teclado y en el celular).
+- **Proyectos**: tarjetas con captura, tecnologías y enlaces.
+- **Contacto**: formulario (Formspree) y acceso directo a WhatsApp.
+
+## Correr en local
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Formulario de contacto
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+El formulario envía por [Formspree](https://formspree.io) si existe la variable de entorno:
 
-## Learn More
+```
+NEXT_PUBLIC_FORMSPREE_ID=xxxxxxxx
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Sin ella, al enviar se abre WhatsApp con el mensaje ya escrito, así que nunca queda un formulario roto.

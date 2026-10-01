@@ -1,52 +1,27 @@
 "use client";
 
-import { useEffect } from "react";
 import Image from "next/image";
-import { useTheme } from "./../tema/index";
-import { THEMES } from "./../../constantes/index";
+import { Briefcase } from "lucide-react";
+import { useTheme } from "../tema";
+import { THEMES, THEME_IDS } from "../../constantes";
 import "./estilos.css";
 
 export default function Switch() {
-  const { themeId, setThemeId } = useTheme();
+  const { themeId, theme, cycleTheme } = useTheme();
 
-  useEffect(() => {
-    Object.values(THEMES).forEach((theme) => {
-      document.body.classList.remove(theme.bodyClass);
-    });
-
-    if (themeId && THEMES[themeId as keyof typeof THEMES]) {
-      document.body.classList.add(THEMES[themeId as keyof typeof THEMES].bodyClass);
-    }
-  }, [themeId]);
-
-const handleToggle = () => {
-  setThemeId((prevThemeId: string | null) => {
-    const keys = Object.keys(THEMES);
-    const currentIndex = prevThemeId ? keys.indexOf(prevThemeId) : -1;
-
-    const nextIndex = (currentIndex + 1) % keys.length;
-    const nextTheme = keys[nextIndex];
-
-    console.log("Tema actual:", prevThemeId ?? "ninguno", "-> Siguiente tema:", nextTheme);
-
-    return nextTheme;
-  });
-};
-
-  const currentTheme = themeId ? THEMES[themeId as keyof typeof THEMES] : null;
+  const nextId = THEME_IDS[(themeId ? THEME_IDS.indexOf(themeId) + 1 : 0) % THEME_IDS.length];
+  const label = `Cambiar a tema ${THEMES[nextId].name}`;
 
   return (
-    <button onClick={handleToggle} className="switch-btn">
-      {currentTheme?.icon ? (
-        <Image 
-          src={currentTheme.icon} 
-          alt="Icono del tema" 
-          width={24} 
-          height={24} 
-        />
-      ) : (
-        <span>👔</span>
-      )}
+    <button type="button" onClick={cycleTheme} className="switch-btn" aria-label={label} title={label}>
+      {/* La key reinicia la animación del ícono en cada cambio */}
+      <span key={themeId ?? "base"} className="switch-icon">
+        {theme?.icon ? (
+          <Image src={theme.icon} alt="" width={24} height={24} />
+        ) : (
+          <Briefcase size={22} />
+        )}
+      </span>
     </button>
   );
 }

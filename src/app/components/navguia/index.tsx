@@ -1,50 +1,55 @@
 "use client";
-import { useEffect } from "react";
+
+import { useEffect, useState } from "react";
 import "./estilos.css";
 
+const SECCIONES = [
+  { id: "info", label: "Información" },
+  { id: "habilidades", label: "Habilidades" },
+  { id: "proyectos", label: "Proyectos" },
+  { id: "contacto", label: "Contacto" },
+];
+
 export default function NavGuia() {
-  // Lógica para iluminar la línea según el scroll
+  const [active, setActive] = useState("info");
+
+  // Marca la sección que cruza la mitad de la pantalla, sin recalcular en cada evento de scroll.
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = document.querySelectorAll("section");
-      const navDots = document.querySelectorAll(".line");
-
-      sections.forEach((section) => {
-        const rect = section.getBoundingClientRect();
-        // Si la sección está en la vista, activamos su línea
-        if (rect.top >= -50 && rect.top <= window.innerHeight / 2) {
-          navDots.forEach((dot) => dot.classList.remove("active"));
-          const activeDot = document.querySelector(`[data-target="#${section.id}"]`);
-          activeDot?.classList.add("active");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id);
         }
-      });
-    };
+      },
+      { rootMargin: "-45% 0px -45% 0px" },
+    );
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    for (const { id } of SECCIONES) {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    }
+    return () => observer.disconnect();
   }, []);
 
-  // Lógica para el clic: te lleva directo a la sección
-const handleClick = (id: string) => {
-    // Si el ID es #info, vamos al tope absoluto
-    if (id === "#info") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      // Para las demás secciones, usamos scrollIntoView como antes
-      const element = document.querySelector(id);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }
+  const handleClick = (id: string) => {
+    if (id === "info") window.scrollTo({ top: 0, behavior: "smooth" });
+    else document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <div className="scroll-indicator">
-      {/* Al hacer clic, enviamos el ID al que debe ir */}
-      <div className="line" data-target="#info" onClick={() => handleClick("#info")}></div>
-      <div className="line" data-target="#habilidades" onClick={() => handleClick("#habilidades")}></div>
-      <div className="line" data-target="#proyectos" onClick={() => handleClick("#proyectos")}></div>
-      <div className="line" data-target="#contacto" onClick={() => handleClick("#contacto")}></div>
-    </div>
+    <nav className="scroll-indicator" aria-label="Secciones">
+      {SECCIONES.map(({ id, label }) => (
+        <button
+          key={id}
+          type="button"
+          className={`line ${active === id ? "active" : ""}`}
+          onClick={() => handleClick(id)}
+          aria-label={label}
+          aria-current={active === id ? "true" : undefined}
+        >
+          <span className="line-label">{label}</span>
+        </button>
+      ))}
+    </nav>
   );
 }

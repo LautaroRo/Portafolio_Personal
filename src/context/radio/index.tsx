@@ -1,116 +1,81 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Radio, Play, Pause, X, Music } from "lucide-react";
-import { useTheme } from "./../tema/index";
-import { useSoundtrack } from "./../soundtrack/index";
-import { THEMES } from "./../../constantes/index";
+import { useTheme } from "../tema";
+import { useSoundtrack } from "../soundtrack";
 import "./estilos.css";
 
+// El sonido de clic lo pone ClickSoundProvider para toda la página; acá no se repite.
 export default function RadioPlayer() {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme } = useTheme();
+  const { isPlaying, playTrack, stopTrack, currentTrack, progress } = useSoundtrack();
 
-  const { themeId } = useTheme();
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setIsOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen]);
 
-  const {
-    isPlaying,
-    playTrack,
-    stopTrack,
-    currentTrack,
-    progress,
-  } = useSoundtrack();
-
-  const activeTheme = themeId
-    ? THEMES[themeId as keyof typeof THEMES]
-    : null;
-
-  // Si el tema no tiene playlist, no mostrar el reproductor
-  if (!activeTheme?.playlist || activeTheme.playlist.length === 0) {
-    return null;
-  }
-
-  const playClickSound = () => {
-    if (!activeTheme?.clickSound) return;
-
-    const audio = new Audio(activeTheme.clickSound);
-
-    audio.play().catch(() => {});
-  };
+  if (!theme?.playlist.length) return null;
 
   return (
     <div className="radioContainer">
       {!isOpen ? (
         <button
-          onClick={(e) => {
-            e.stopPropagation();
-            playClickSound();
-            setIsOpen(true);
-          }}
-          className="triggerButton"
+          type="button"
+          onClick={() => setIsOpen(true)}
+          className={`triggerButton ${isPlaying ? "is-playing" : ""}`}
+          aria-label="Abrir radio"
+          title="Radio"
         >
           <Radio size={24} />
+          {isPlaying && <span className="radioPulse" aria-hidden />}
         </button>
       ) : (
-        <div className="playerWindow">
+        <div className="playerWindow" role="dialog" aria-label={theme.title}>
           <div className="header">
-            <span>
-              <Music size={14} /> {activeTheme.title ?? "RADIO"}
+            <span className="headerTitle">
+              <Music size={14} /> {theme.title}
             </span>
 
-            <X
-              size={16}
-              onClick={(e) => {
-                e.stopPropagation();
-                playClickSound();
-                setIsOpen(false);
-              }}
-              style={{ cursor: "pointer" }}
-            />
+            <button type="button" className="closeButton" onClick={() => setIsOpen(false)} aria-label="Cerrar radio">
+              <X size={16} />
+            </button>
           </div>
 
           <div className="progressBarContainer">
-            <div
-              className="progressBar"
-              style={{ width: `${progress}%` }}
-            />
+            <div className="progressBar" style={{ width: `${progress}%` }} />
           </div>
 
-          <div className="trackList">
-            {activeTheme.playlist.map((track) => (
-              <div
-                key={track.title}
-                className="trackItem"
-              >
-                <span className="trackTitle">
-                  {track.title}
-                </span>
-
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    playClickSound();
-
-                    if (
-                      isPlaying &&
-                      currentTrack === track.file
-                    ) {
-                      stopTrack();
-                    } else {
-                      playTrack(track.file);
-                    }
-                  }}
-                  className="playButton"
-                >
-                  {isPlaying &&
-                  currentTrack === track.file ? (
-                    <Pause size={18} />
+          <ul className="trackList">
+            {theme.playlist.map((track, i) => {
+              const active = isPlaying && currentTrack === track.file;
+              return (
+                <li key={track.file} className={`trackItem ${active ? "active" : ""}`} style={{ animationDelay: `${i * 60}ms` }}>
+                  {active ? (
+                    <span className="equalizer" aria-hidden>
+                      <i /><i /><i />
+                    </span>
                   ) : (
-                    <Play size={18} />
+                    <span className="trackNumber">{i + 1}</span>
                   )}
-                </button>
-              </div>
-            ))}
-          </div>
+                  <span className="trackTitle">{track.title}</span>
+
+                  <button
+                    type="button"
+                    onClick={() => (active ? stopTrack() : playTrack(track.file))}
+                    className="playButton"
+                    aria-label={active ? `Pausar ${track.title}` : `Reproducir ${track.title}`}
+                  >
+                    {active ? <Pause size={18} /> : <Play size={18} />}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       )}
     </div>

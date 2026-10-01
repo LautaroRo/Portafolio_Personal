@@ -3,41 +3,6 @@
   text-align: center;
 }
 
-.habilidades-container h2 {
-  color: #fff;
-  font-size: 2rem;
-  margin-bottom: 40px;
-}
-
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.skill-item {
-  padding: 15px 30px;
-  /* Usamos variables CSS para que el "tema" (Omnitrix) pueda controlarlo */
-  background: var(--bg-card, #1a1a1a);
-  border: 1px solid #333;
-  color: #fff;
-  border-radius: 8px;
-  cursor: default;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.skill-item:hover {
-  /* Al pasar el mouse, brilla con el color del tema actual */
-  border-color: var(--accent-color, #fff);
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(255,255,255,0.1);
-}
-
-/* src/app/components/habilidades/estilos.css */
-/* src/app/components/habilidades/estilos.css */
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -48,29 +13,55 @@
 }
 
 .skill-item {
+  position: relative;
   padding: 12px 25px;
-  background: rgba(255, 255, 255, 0.03); /* Casi transparente */
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 50px; /* Forma de píldora abstracta */
+  border-radius: 50px;
   color: #fff;
   cursor: grab;
-  transition: transform 0.2s ease, background 0.3s;
-  backdrop-filter: blur(5px); /* Efecto cristal */
+  user-select: none;
+  touch-action: manipulation;
+  backdrop-filter: blur(5px);
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s, translate 0.25s ease;
 }
 
-/* Efecto al arrastrar */
-.skill-item:active {
+/* Las píldoras entran en cascada cuando la sección aparece.
+   Se animan `scale` y `translate`, nunca `transform`, que es de dnd-kit. */
+.skills-grid .skill-item {
+  opacity: 0;
+}
+
+.skills-grid.is-visible .skill-item {
+  opacity: 1;
+  /* backwards y no both: al terminar suelta `scale` para que el arrastre lo pueda usar */
+  animation: skill-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  animation-delay: calc(var(--i) * 45ms);
+}
+
+@keyframes skill-pop {
+  from { opacity: 0; scale: 0.5; }
+  to { opacity: 1; scale: 1; }
+}
+
+.skill-item:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.08);
+  translate: 0 -4px;
+}
+
+.skill-item.is-dragging {
   cursor: grabbing;
-  background: var(--accent-color, rgba(255, 255, 255, 0.1));
-  transform: scale(1.1); /* Crece al tomarlo */
+  z-index: 10;
+  scale: 1.1;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* --- Ajustes Responsive: Solo se aplica en pantallas pequeñas --- */
 @media (max-width: 768px) {
-
-  .habilidades-container h2 {
-    font-size: 1.5rem;
-    margin-bottom: 25px;
+  .habilidades-container {
+    padding: 70px 16px;
   }
 
   .grid {

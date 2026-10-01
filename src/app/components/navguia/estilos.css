@@ -5,25 +5,89 @@
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: flex-end;
+  gap: 14px;
   z-index: 1000;
+  animation: fade-left 0.6s 0.8s ease both;
 }
 
-.line {
-  width: 2px;
-  height: 30px; /* Tamaño de la linita */
-  background-color: #333; /* Color inactivo */
-  transition: all 0.3s ease;
+@keyframes fade-left {
+  from { opacity: 0; transform: translate(20px, -50%); }
+  to { opacity: 1; transform: translateY(-50%); }
+}
+
+/* El botón es más ancho que la línea para que sea fácil de tocar.
+   Doble clase para ganarle a los estilos de botón de cada tema (body.x-mode button). */
+.scroll-indicator .line {
+  position: relative;
+  width: 14px;
+  height: 30px;
+  padding: 0;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
   cursor: pointer;
+  transition: height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.line.active {
-  background-color: #fff; /* Color activo */
-  height: 60px; /* Se estira cuando es la sección actual */
+.line::before {
+  content: "";
+  position: absolute;
+  right: 6px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  border-radius: 2px;
+  background-color: #444;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-@media (max-width: 700px){
-.scroll-indicator{
-  right: 10px;
+.line:hover::before {
+  background-color: #888;
 }
+
+.scroll-indicator .line.active {
+  height: 60px;
+}
+
+.scroll-indicator .line:hover {
+  transform: none;
+}
+
+.line.active::before {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+/* Nombre de la sección al pasar el mouse */
+.line-label {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translate(8px, -50%);
+  white-space: nowrap;
+  font-size: 0.75rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 4px 10px;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.line:hover .line-label,
+.line:focus-visible .line-label {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+@media (max-width: 700px) {
+  .scroll-indicator {
+    right: 4px;
+  }
+
+  .line-label {
+    display: none;
+  }
 }
