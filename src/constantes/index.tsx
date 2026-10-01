@@ -1,7 +1,6 @@
-// Un tema es un MP3 propio (file) o un video oficial de YouTube (youtube)
-export type Track = { title: string; file?: string; youtube?: string };
+export type Track = { title: string; file: string };
 
-export const trackKey = (t: Track) => t.file ?? `yt:${t.youtube}`;
+export const trackKey = (t: Track) => t.file;
 
 export type Theme = {
   name: string;
@@ -91,11 +90,10 @@ export const THEMES = {
     icon: "/iconos/gta6.svg",
     tagline: "Atardecer en Leonida",
     swatch: ["#ff3e8a", "#ffb347"],
-    // Videos oficiales: YouTube no permite reproducir solo el audio, por eso se ven en la radio
     playlist: [
-      { title: "Love Is a Long Road · Tom Petty", youtube: "xAgUYyosqVM" },
-      { title: "Devil Woman · Cliff Richard", youtube: "CQ9s3nDqSRw" },
-      { title: "Inner Light · Elderbrook & Bob Moses", youtube: "4DPCHufDWJQ" },
+      { title: "Love Is a Long Road · Tom Petty", file: "/soundtracks/gta6/LoveIsALongRoad.mp3" },
+      { title: "Devil Woman · Cliff Richard", file: "/soundtracks/gta6/DevilWoman.mp3" },
+      { title: "Inner Light · Elderbrook & Bob Moses", file: "/soundtracks/gta6/InnerLight.mp3" },
     ],
     scene: "vice",
   },

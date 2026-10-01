@@ -6,7 +6,6 @@ import { Briefcase, Check, ChevronUp, Music, Pause, Play, SkipBack, SkipForward,
 import { useTheme } from "../../../context/tema";
 import { useSoundtrack } from "../../../context/soundtrack";
 import { THEMES, THEME_IDS, Theme, trackKey } from "../../../constantes";
-import YouTubeRadio from "./youtube-radio";
 import "./estilos.css";
 
 type Panel = "mundos" | "radio" | null;
@@ -42,7 +41,6 @@ export default function Dock() {
 
   const playlist = theme?.playlist ?? [];
   const pista = playlist.find((t) => trackKey(t) === radio.currentTrack) ?? null;
-  const conVideo = playlist.some((t) => t.youtube);
   const actual = theme ?? THEMES.profesional;
 
   // Si el mundo nuevo no tiene radio, se cierra el reproductor
@@ -119,7 +117,7 @@ export default function Dock() {
       )}
 
       {panelVisible === "radio" && (
-        <div className={`dock-panel dock-player ${conVideo ? "has-video" : ""}`} role="dialog" aria-label={actual.title}>
+        <div className="dock-panel dock-player" role="dialog" aria-label={actual.title}>
           <div className="dock-player-top">
             <span
               className={`dock-cover ${radio.isPlaying ? "spinning" : ""}`}
@@ -135,13 +133,6 @@ export default function Dock() {
               <X size={16} />
             </button>
           </div>
-
-          {conVideo && (
-            <>
-              <YouTubeRadio />
-              <p className="dock-video-note">Videos oficiales vía YouTube · suenan con la radio abierta</p>
-            </>
-          )}
 
           <div
             className="dock-progress"

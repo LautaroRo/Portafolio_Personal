@@ -629,8 +629,7 @@ body:not([class*="-mode"]) .dock-world-icon {
     from { opacity: 0; }
   }
 
-  .dock-panel,
-  .dock-panel.dock-player.has-video {
+  .dock-panel {
     position: relative;
     z-index: 1;
     width: 100%;
@@ -667,50 +666,3 @@ body:not([class*="-mode"]) .dock-world-icon {
   }
 }
 
-/* --- Radio con videos de YouTube (GTA VI) --- */
-.dock-panel.dock-player.has-video {
-  width: 400px;
-}
-
-/* 16:9 y al menos 200 px de alto: el mínimo que pide YouTube para su reproductor */
-.dock-video {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  min-height: 200px;
-  margin-bottom: 6px;
-  overflow: hidden;
-  border-radius: calc(var(--ui-radius) - 4px);
-  background: #000;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
-}
-
-.dock-video iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-.dock-video-note {
-  margin-bottom: 14px;
-  font-size: 0.65rem;
-  color: var(--ui-dim);
-  text-align: center;
-}
-
-
-@media (max-width: 600px) {
-  /* 16:9 con 200 px de alto mínimo lo ensanchaba más que la hoja: alto fijo y ancho completo */
-  .dock-video {
-    aspect-ratio: auto;
-    width: 100%;
-    height: 200px;
-  }
-
-  /* Tiene que ir después de la regla de 400 px del reproductor con video */
-  .dock-panel.dock-player.has-video {
-    width: 100%;
-  }
-}
