@@ -24,7 +24,7 @@ export const THEMES = {
   minecraft: {
     name: "Minecraft",
     video: "/fondos_img/VideoMinecraft.mp4",
-    clickSound: "/sonidos/botonMinecraft.mp3",
+    clickSound: "/sonidos/clic-minecraft.mp3",
     bodyClass: "minecraft-mode",
     title: "MINECRAFT OST",
     icon: "/iconos/minecraft.svg",
@@ -39,7 +39,7 @@ export const THEMES = {
   silenthill: {
     name: "Silent Hill 2",
     video: "/fondos_img/SilentHill2Video.mp4",
-    clickSound: "/sonidos/botonSilentHill.mp3",
+    clickSound: "/sonidos/clic-silenthill.mp3",
     bodyClass: "silenthill-mode",
     title: "SILENT HILL OST",
     icon: "/iconos/silenthill.svg",
@@ -54,7 +54,7 @@ export const THEMES = {
   thelastofus: {
     name: "The Last of Us",
     video: "/fondos_img/TlouVideo.mp4",
-    clickSound: "/sonidos/botonTlou.mp3",
+    clickSound: "/sonidos/clic-tlou.mp3",
     bodyClass: "tlou-mode",
     title: "TLOU OST",
     icon: "/iconos/tlou.svg",
@@ -69,7 +69,7 @@ export const THEMES = {
   redead: {
     name: "Red Dead Redemption 2",
     video: "/fondos_img/ReadDeadVideo.mp4",
-    clickSound: "/sonidos/botonRedDead.mp3",
+    clickSound: "/sonidos/clic-redead.mp3",
     bodyClass: "redead-mode",
     title: "RED DEAD OST",
     icon: "/iconos/redead.svg",
@@ -85,7 +85,7 @@ export const THEMES = {
     name: "GTA VI",
     video: null,
     youtube: "6_ohA33V6-A",
-    clickSound: null,
+    clickSound: "/sonidos/clic-gta6.mp3",
     bodyClass: "gta-mode",
     title: "VICE CITY FM",
     icon: "/iconos/gta6.svg",

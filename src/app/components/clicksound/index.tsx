@@ -13,6 +13,7 @@ export default function ClickSoundProvider({ children }: { children: React.React
     // Un solo Audio por tema, precargado, en vez de crear uno nuevo en cada clic.
     const audio = new Audio(sound);
     audio.preload = "auto";
+    audio.volume = 0.5;
 
     const handleClick = (e: MouseEvent) => {
       // Solo suena en lo que se puede clickear, no en cualquier parte de la página.
