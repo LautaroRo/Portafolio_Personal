@@ -1,13 +1,18 @@
+"use client";
+
+import { useTextos } from "../../../context/tema";
 import "./estilos.css";
 
-const LINKS = [
-  { href: "#info", label: "Información" },
-  { href: "#habilidades", label: "Habilidades" },
-  { href: "#proyectos", label: "Proyectos" },
-  { href: "#contacto", label: "Contacto" },
-];
-
 export default function NavBar() {
+  const t = useTextos();
+
+  const links = [
+    { href: "#info", label: t["nav.info"] },
+    { href: "#habilidades", label: t["nav.skills"] },
+    { href: "#proyectos", label: t["nav.projects"] },
+    { href: "#contacto", label: t["nav.contact"] },
+  ];
+
   return (
     <nav className="navbar" aria-label="Principal">
       <div className="nav-container">
@@ -20,12 +25,12 @@ export default function NavBar() {
             ))}
           </a>
           <a href="#contacto" className="btn-cta">
-            Nuevo proyecto
+            {t.cta}
           </a>
         </div>
 
         <div className="nav-links">
-          {LINKS.map((link, i) => (
+          {links.map((link, i) => (
             <a key={link.href} href={link.href} style={{ animationDelay: `${300 + i * 80}ms` }}>
               {link.label}
             </a>

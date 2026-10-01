@@ -1,8 +1,12 @@
-.switch-btn {
+.theme-switch {
   position: fixed;
   bottom: 24px;
   left: 20px;
   z-index: 9999;
+}
+
+.switch-btn {
+  position: relative;
   width: 58px;
   height: 58px;
   background: #1a1a1a;
@@ -26,7 +30,7 @@
   transform: scale(0.94);
 }
 
-/* Anillo que invita a probar los temas hasta que se usa el botón */
+/* Anillo que invita a probar los temas hasta que se elige uno */
 body:not([class*="-mode"]) .switch-btn::after {
   content: "";
   position: absolute;
@@ -47,7 +51,91 @@ body:not([class*="-mode"]) .switch-btn::after {
   animation: switch-spin 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+.switch-icon img {
+  object-fit: contain;
+}
+
 @keyframes switch-spin {
   from { transform: rotate(-180deg) scale(0.3); opacity: 0; }
   to { transform: none; opacity: 1; }
+}
+
+/* --- Menú --- */
+.theme-menu {
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  width: 230px;
+  list-style: none;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(14, 14, 14, 0.96);
+  border: 1px solid #333;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  transform-origin: bottom left;
+  animation: menu-open 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes menu-open {
+  from { opacity: 0; transform: scale(0.7) translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+.theme-menu li {
+  animation: menu-item 0.3s ease both;
+}
+
+@keyframes menu-item {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* .theme-switch delante para ganarle a los estilos de botón de cada tema */
+.theme-switch .theme-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #ddd;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.theme-switch .theme-option:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(4px);
+}
+
+.theme-switch .theme-option.active {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+.theme-option-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background: #1f1f1f;
+  overflow: hidden;
+}
+
+.theme-option-icon img {
+  object-fit: contain;
+}
+
+.theme-option-name {
+  flex: 1;
 }

@@ -8,6 +8,8 @@ export type Theme = {
   title: string;
   icon: string | null;
   playlist: Track[];
+  // Fondo animado propio cuando el tema no tiene video
+  scene?: "vice";
 };
 
 export const THEMES = {
@@ -62,6 +64,17 @@ export const THEMES = {
       { title: "That's the Way It Is", file: "/soundtracks/reddead/ThatstheWayItIs.mp3" },
       { title: "The Fine Art of Conversation", file: "/soundtracks/reddead/TheFineArtOfConversation.mp3" },
     ],
+  },
+  gta6: {
+    name: "GTA VI",
+    // Para usar un video: dejarlo en public/fondos_img/ y poner acá su ruta.
+    video: null,
+    clickSound: null,
+    bodyClass: "gta-mode",
+    title: "VICE CITY FM",
+    icon: "/iconos/gta6_logo.svg",
+    playlist: [],
+    scene: "vice",
   },
   profesional: {
     name: "Profesional",

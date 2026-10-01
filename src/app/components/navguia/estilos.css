@@ -59,6 +59,10 @@
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 }
 
+.line-num {
+  display: none;
+}
+
 /* Nombre de la sección al pasar el mouse */
 .line-label {
   position: absolute;

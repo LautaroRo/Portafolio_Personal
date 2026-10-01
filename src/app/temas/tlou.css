@@ -1,0 +1,378 @@
+/* =========================================================
+   THE LAST OF US — esporas, luciérnagas, HUD minimalista
+   con esquinas marcadas y barra de vida segmentada
+   ========================================================= */
+
+@font-face {
+  font-family: "PressGothic";
+  src: url("/fonts/pressgothic.otf") format("opentype");
+  font-display: swap;
+}
+
+body.tlou-mode {
+  --tl-text: #ece7d9;
+  --tl-dim: #a3a08f;
+  --tl-amber: #f2c14e;
+  --tl-green: #7d8f4e;
+  --tl-panel: rgba(12, 16, 11, 0.72);
+  --tl-line: rgba(236, 231, 217, 0.22);
+  background: #0c0f0b;
+}
+
+body.tlou-mode .page-shell {
+  background: rgba(5, 8, 5, 0.12);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  color: var(--tl-text);
+}
+
+body.tlou-mode :is(h1, h2, h3, .logo, .section-title, .hero-btn, .btn-cta, .btn-enviar, .btn-action, .btn-whatsapp, .nav-links a) {
+  font-family: "PressGothic", Impact, sans-serif;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+/* Esquinas de HUD: cuatro escuadras finas */
+body.tlou-mode :is(.project-card, .form-success, .playerWindow, .theme-menu) {
+  --c: rgba(236, 231, 217, 0.7);
+  background:
+    linear-gradient(var(--c), var(--c)) top left / 16px 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) top left / 1px 16px no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / 16px 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / 1px 16px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / 16px 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / 1px 16px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / 16px 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / 1px 16px no-repeat,
+    var(--tl-panel);
+  border: 1px solid rgba(236, 231, 217, 0.08);
+  border-radius: 0;
+  backdrop-filter: blur(6px);
+}
+
+/* --- Botones: barra blanca que entra desde la izquierda, como el menú del juego --- */
+body.tlou-mode :is(.btn-cta, .hero-btn, .btn-enviar, .btn-whatsapp) {
+  border-radius: 0;
+  border: 1px solid var(--tl-line);
+  color: var(--tl-text);
+  background: linear-gradient(var(--tl-text), var(--tl-text)) left / 0% 100% no-repeat, rgba(0, 0, 0, 0.35);
+  box-shadow: none;
+  transition: background-size 0.35s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s ease;
+}
+
+body.tlou-mode :is(.btn-cta, .hero-btn, .btn-enviar, .btn-whatsapp):hover {
+  background-size: 100% 100%, auto;
+  color: #12160f;
+  transform: none;
+  box-shadow: none;
+}
+
+body.tlou-mode .btn-cta::before {
+  display: none;
+}
+
+/* --- Navbar --- */
+body.tlou-mode .logo {
+  font-size: 1.6rem;
+  letter-spacing: 8px;
+}
+
+body.tlou-mode .nav-links {
+  border-top-color: var(--tl-line);
+}
+
+body.tlou-mode .nav-links a {
+  color: var(--tl-dim);
+}
+
+body.tlou-mode .nav-links a:hover {
+  color: var(--tl-text);
+}
+
+/* --- Hero --- */
+body.tlou-mode .hero-kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 26px;
+  color: var(--tl-dim);
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.firefly {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f4e27a;
+  box-shadow: 0 0 10px 4px rgba(244, 226, 122, 0.55);
+  animation: firefly-blink 1.4s ease-in-out infinite alternate;
+}
+
+body.tlou-mode .avatar-ring {
+  background: none;
+  border: 2px dashed var(--tl-amber);
+  animation-duration: 30s;
+  filter: none;
+}
+
+body.tlou-mode .avatar-ring::after {
+  background: radial-gradient(circle, rgba(242, 193, 78, 0.35), transparent 70%);
+  opacity: 0.6;
+}
+
+body.tlou-mode .avatar-core {
+  background: radial-gradient(circle at 35% 30%, #222a1d, #0b0e09 70%);
+  font-family: "PressGothic", Impact, sans-serif;
+  font-weight: 400;
+  color: var(--tl-text);
+}
+
+body.tlou-mode .hero-title {
+  font-size: 3.2rem;
+  letter-spacing: 3px;
+}
+
+body.tlou-mode .hero-name {
+  color: var(--tl-amber);
+  text-shadow: 0 0 24px rgba(242, 193, 78, 0.35);
+}
+
+body.tlou-mode .hero-wave {
+  display: none;
+}
+
+body.tlou-mode .hero-role {
+  color: var(--tl-dim);
+  letter-spacing: 1px;
+}
+
+body.tlou-mode .typewriter {
+  color: var(--tl-text);
+}
+
+body.tlou-mode .hero-bio {
+  color: #b9b5a6;
+}
+
+body.tlou-mode .scroll-cue {
+  border-radius: 0;
+  border-color: var(--tl-line);
+}
+
+/* --- Títulos --- */
+body.tlou-mode .section-title {
+  font-size: 2.4rem;
+  letter-spacing: 6px;
+}
+
+body.tlou-mode .section-title::before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  margin: 0 auto 14px;
+  rotate: 45deg;
+  background: var(--tl-amber);
+  box-shadow: 0 0 12px rgba(242, 193, 78, 0.7);
+}
+
+body.tlou-mode .section-hint {
+  color: var(--tl-dim);
+}
+
+/* --- Mejoras (habilidades): manuales de entrenamiento --- */
+body.tlou-mode .skill-item {
+  border-radius: 0;
+  border: 1px solid var(--tl-line);
+  border-left: 3px solid var(--tl-amber);
+  background: var(--tl-panel);
+  color: var(--tl-text);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+}
+
+body.tlou-mode .skill-item:hover {
+  border-color: rgba(242, 193, 78, 0.6);
+  border-left-color: var(--tl-amber);
+  background: rgba(40, 34, 16, 0.75);
+  box-shadow: 0 0 20px rgba(242, 193, 78, 0.18);
+}
+
+/* --- Artefactos (proyectos) --- */
+body.tlou-mode .bento-grid {
+  counter-reset: artefacto;
+}
+
+body.tlou-mode .project-card {
+  counter-increment: artefacto;
+  color: var(--tl-text);
+}
+
+body.tlou-mode .project-card:hover:not(.locked) {
+  border-color: rgba(242, 193, 78, 0.35);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(242, 193, 78, 0.08);
+}
+
+body.tlou-mode .project-card::before {
+  background: radial-gradient(380px circle at var(--mx) var(--my), rgba(242, 193, 78, 0.1), transparent 45%);
+}
+
+body.tlou-mode .project-card h3 {
+  font-size: 1.6rem;
+}
+
+body.tlou-mode .project-card h3::before {
+  content: "Artefacto " counter(artefacto, decimal-leading-zero);
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  color: var(--tl-amber);
+}
+
+body.tlou-mode .description {
+  color: #b9b5a6;
+}
+
+body.tlou-mode .project-image {
+  border-radius: 0;
+}
+
+body.tlou-mode .project-image img {
+  filter: saturate(0.6) sepia(0.15) brightness(0.9);
+  transition: filter 0.8s ease, transform 0.7s ease, object-position 2.5s ease;
+}
+
+body.tlou-mode .project-card:hover .project-image img {
+  filter: none;
+}
+
+body.tlou-mode .tag {
+  border-radius: 0;
+  background: transparent;
+  border: 1px solid var(--tl-line);
+  color: var(--tl-dim);
+}
+
+body.tlou-mode .btn-action {
+  border-radius: 0;
+  border-color: var(--tl-line);
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 0.95rem;
+}
+
+body.tlou-mode a.btn-action:hover {
+  background: var(--tl-text);
+  color: #12160f;
+}
+
+/* Zona en cuarentena */
+body.tlou-mode .project-card.locked {
+  opacity: 1;
+  border-style: solid;
+}
+
+body.tlou-mode .project-card.locked::after {
+  inset: 0 0 auto;
+  height: 10px;
+  background: repeating-linear-gradient(-45deg, var(--tl-amber) 0 10px, #111 10px 20px);
+  background-size: auto;
+  opacity: 0.7;
+  animation: none;
+}
+
+body.tlou-mode .project-card.locked h3::before {
+  content: "Zona";
+}
+
+body.tlou-mode .lock-icon {
+  color: rgba(242, 193, 78, 0.25);
+  font-family: "PressGothic", Impact, sans-serif;
+}
+
+/* --- Señal (contacto) --- */
+body.tlou-mode .field input,
+body.tlou-mode .field textarea {
+  border-radius: 0;
+  border-color: var(--tl-line);
+  background: var(--tl-panel);
+}
+
+body.tlou-mode .field input:focus,
+body.tlou-mode .field textarea:focus {
+  border-color: var(--tl-amber);
+  box-shadow: 0 0 0 3px rgba(242, 193, 78, 0.12);
+}
+
+body.tlou-mode .whatsapp-container {
+  border-top-color: var(--tl-line);
+  color: var(--tl-dim);
+}
+
+body.tlou-mode .success-icon {
+  color: var(--tl-amber);
+}
+
+/* --- Barra de vida: segmentada, abajo a la derecha --- */
+body.tlou-mode .scroll-progress {
+  top: auto;
+  left: auto;
+  right: 70px;
+  bottom: 30px;
+  width: 200px;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--tl-line);
+}
+
+body.tlou-mode .scroll-progress-fill {
+  background: repeating-linear-gradient(90deg, var(--tl-text) 0 calc(20% - 3px), transparent calc(20% - 3px) 20%);
+  box-shadow: none;
+}
+
+body.tlou-mode .line.active::before {
+  background: var(--tl-amber);
+  box-shadow: 0 0 10px rgba(242, 193, 78, 0.8);
+}
+
+/* --- Controles --- */
+body.tlou-mode .switch-btn,
+body.tlou-mode .triggerButton {
+  border-radius: 0;
+  background: rgba(12, 16, 11, 0.9);
+  border-color: var(--tl-line);
+}
+
+body.tlou-mode .trackItem {
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+body.tlou-mode .trackItem.active {
+  border-color: var(--tl-amber);
+}
+
+body.tlou-mode .progressBar,
+body.tlou-mode .equalizer i {
+  background: var(--tl-amber);
+}
+
+@media (max-width: 768px) {
+  body.tlou-mode .hero-title {
+    font-size: 2.2rem;
+  }
+
+  body.tlou-mode .section-title {
+    font-size: 1.8rem;
+  }
+
+  body.tlou-mode .scroll-progress {
+    width: 120px;
+    right: 20px;
+    bottom: 36px;
+  }
+}

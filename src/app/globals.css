@@ -95,17 +95,27 @@ body {
 
 /* Barra de progreso de lectura */
 .scroll-progress {
+  --progress: 0;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 3px;
   z-index: 10000;
-  transform: scaleX(0);
+  pointer-events: none;
+}
+
+.scroll-progress-fill {
+  position: absolute;
+  inset: 0;
+  transform: scaleX(var(--progress));
   transform-origin: left;
   background: linear-gradient(90deg, #6366f1, #22d3ee, #a855f7);
   box-shadow: 0 0 10px rgba(99, 102, 241, 0.6);
-  pointer-events: none;
+}
+
+.scroll-progress-level {
+  display: none;
 }
 
 /* Transición al cambiar de tema */
@@ -201,199 +211,14 @@ body.theme-switching .page-shell {
   mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
 }
 
-/* En los temas de juegos el nombre va en color liso: el degradado se rompe con sus sombras y filtros */
-body[class*="-mode"]:not(.pro-mode) .hero-name {
+/* Los estilos de cada mundo viven en src/app/temas/ */
+
+/* El degradado del nombre es del modo normal: los mundos lo pintan con su propio color */
+body[class*="-mode"]:not(.pro-mode):not(.gta-mode) .hero-name {
   background: none;
-  color: inherit;
-  animation: none;
 }
 
-/* --- 4. Modo Minecraft --- */
-@font-face {
-  font-family: "MinecraftFont";
-  src: url("/fonts/minecraft.ttf") format("truetype");
-  font-display: swap;
-}
-
-body.minecraft-mode {
-  background: transparent !important;
-}
-
-body.minecraft-mode button,
-body.minecraft-mode .btn-cta {
-  color: #fff !important;
-  border: 3px solid #000 !important;
-  border-radius: 0 !important;
-  box-shadow: inset -2px -2px 0px #333, inset 2px 2px 0px #ddd !important;
-  cursor: pointer;
-  transition: all 0.1s;
-}
-
-body.minecraft-mode button:hover,
-body.minecraft-mode .btn-cta:hover {
-  background-color: rgba(160, 160, 160, 0.9) !important;
-  box-shadow: inset -2px -2px 0px #555, inset 2px 2px 0px #fff !important;
-}
-
-body.minecraft-mode,
-body.minecraft-mode * {
-  font-family: "MinecraftFont", sans-serif !important;
-  image-rendering: pixelated !important;
-  text-shadow: 2px 2px 0px #000 !important;
-}
-
-/* --- 5. Modo Silent Hill 2 ---
-   No usar filter en body: rompe los position: fixed. */
-@font-face {
-  font-family: "NotoSerif";
-  src: url("/fonts/NotoSerif-Italic-VariableFont_wdth,wght.ttf") format("truetype");
-  font-style: normal;
-  font-display: swap;
-}
-
-body.silenthill-mode::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9997;
-  backdrop-filter: sepia(0.3) contrast(1.1) saturate(0.8);
-}
-
-body.silenthill-mode::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  pointer-events: none;
-  z-index: 9996;
-  animation: fog 8s ease-in-out infinite alternate;
-}
-
-/* La niebla respira */
-@keyframes fog {
-  from { background: rgba(0, 0, 0, 0.45); }
-  to { background: rgba(30, 30, 30, 0.3); }
-}
-
-body.silenthill-mode,
-body.silenthill-mode * {
-  font-family: "NotoSerif", serif !important;
-  color: #e0e0e0 !important;
-  letter-spacing: 0.5px;
-}
-
-body.silenthill-mode button,
-body.silenthill-mode .btn-cta {
-  background: rgba(40, 40, 40, 0.8) !important;
-  border: 1px solid #666 !important;
-  border-radius: 0 !important;
-  text-transform: uppercase;
-  transition: all 0.4s ease;
-  color: #aaa !important;
-}
-
-body.silenthill-mode button:hover,
-body.silenthill-mode .btn-cta:hover {
-  background: rgba(100, 20, 20, 0.6) !important;
-  border-color: #f00 !important;
-  color: #fff !important;
-}
-
-body.silenthill-mode .switch-btn {
-  background: #000 !important;
-  color: #e0e0e0 !important;
-  border: 1px solid #444 !important;
-}
-
-body.silenthill-mode .radioContainer .playerWindow {
-  background-color: #000 !important;
-}
-
-/* --- 6. Modo The Last of Us --- */
-@font-face {
-  font-family: "PressGothic";
-  src: url("/fonts/pressgothic.otf") format("opentype");
-  font-display: swap;
-}
-
-body.tlou-mode {
-  background: #1a1a1a !important;
-  color: #d1d5db !important;
-}
-
-body.tlou-mode h1,
-body.tlou-mode h2,
-body.tlou-mode h3,
-body.tlou-mode .logo {
-  font-family: "PressGothic", sans-serif !important;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-body.tlou-mode button,
-body.tlou-mode .btn-cta {
-  border: 1px solid #4b5563 !important;
-  border-radius: 0 !important;
-  color: #e5e7eb !important;
-  transition: all 0.3s ease;
-}
-
-body.tlou-mode button:hover,
-body.tlou-mode .btn-cta:hover {
-  background-color: #00000025;
-  color: rgb(216, 211, 211) !important;
-}
-
-body.tlou-mode .switch-btn {
-  background: #d1d5db !important;
-  color: #1a1a1a !important;
-  border: 1px solid #4b5563 !important;
-}
-
-/* --- 7. Modo Red Dead Redemption 2 --- */
-@font-face {
-  font-family: "ChineseRocks";
-  src: url("/fonts/chineserocksrg.otf") format("opentype");
-  font-display: swap;
-}
-
-body.redead-mode {
-  background-color: #1a1614 !important;
-  color: #d6ccc2 !important;
-}
-
-body.redead-mode,
-body.redead-mode * {
-  font-family: "ChineseRocks", serif !important;
-}
-
-body.redead-mode button,
-body.redead-mode .btn-cta {
-  color: #d6ccc2 !important;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-body.redead-mode button:hover,
-body.redead-mode .btn-cta:hover {
-  background: rgba(70, 60, 50, 0.9) !important;
-  border-color: #a09585 !important;
-}
-
-body.redead-mode .global-bg-video {
-  filter: contrast(1.15) brightness(0.85) saturate(1.1);
-}
-
-body.redead-mode .switch-btn {
-  background: #d6ccc2 !important;
-  color: #1a1614 !important;
-  border: 1px solid #a09585 !important;
-}
-
-/* --- 8. Menos movimiento si el sistema lo pide --- */
+/* --- 4. Menos movimiento si el sistema lo pide --- */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

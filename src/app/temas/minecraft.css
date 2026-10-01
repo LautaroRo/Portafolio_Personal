@@ -1,0 +1,455 @@
+/* =========================================================
+   MINECRAFT — interfaz de inventario, botones de piedra,
+   frase amarilla del menú y barra de experiencia
+   ========================================================= */
+
+@font-face {
+  font-family: "MinecraftFont";
+  src: url("/fonts/minecraft.ttf") format("truetype");
+  font-display: swap;
+}
+
+body.minecraft-mode {
+  --mc-panel: #c6c6c6;
+  --mc-slot: #8b8b8b;
+  --mc-ink: #404040;
+  --mc-text: #e0e0e0;
+  --mc-shadow: #3f3f3f;
+  background: #000;
+}
+
+body.minecraft-mode * {
+  font-family: "MinecraftFont", monospace;
+  letter-spacing: 0.5px;
+}
+
+body.minecraft-mode .page-shell {
+  background: rgba(0, 0, 0, 0.1);
+  text-shadow: 2px 2px 0 var(--mc-shadow);
+}
+
+/* --- Botones de piedra --- */
+body.minecraft-mode :is(.btn-cta, .hero-btn, .btn-enviar, .btn-action, .btn-whatsapp, .switch-btn, .triggerButton) {
+  border-radius: 0;
+  border: 2px solid #000;
+  background: #6f6f6f;
+  color: var(--mc-text);
+  text-shadow: 2px 2px 0 #383838;
+  box-shadow: inset 2px 2px 0 #a8a8a8, inset -2px -3px 0 #4a4a4a;
+  transition: none;
+}
+
+body.minecraft-mode :is(.btn-cta, .hero-btn, .btn-enviar, a.btn-action, .btn-whatsapp, .switch-btn, .triggerButton):hover {
+  background: #7b86c2;
+  color: #ffffa0;
+  box-shadow: inset 2px 2px 0 #b3bcf0, inset -2px -3px 0 #4c5690;
+  transform: none;
+}
+
+body.minecraft-mode .btn-cta::before,
+body.minecraft-mode .switch-btn::after {
+  display: none;
+}
+
+body.minecraft-mode .btn-action--muted {
+  background: #2c2c2c;
+  color: #8a8a8a;
+  box-shadow: inset 2px 2px 0 #444, inset -2px -3px 0 #1a1a1a;
+}
+
+/* --- Navbar --- */
+body.minecraft-mode .logo {
+  font-size: 1.5rem;
+  color: #fff;
+  text-shadow: 3px 3px 0 var(--mc-shadow);
+}
+
+body.minecraft-mode .nav-links {
+  border-top: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+body.minecraft-mode .nav-links a {
+  color: var(--mc-text);
+}
+
+body.minecraft-mode .nav-links a:hover {
+  color: #ffffa0;
+}
+
+/* --- Hero: pantalla de título --- */
+body.minecraft-mode .avatar {
+  width: 140px;
+  height: 140px;
+}
+
+body.minecraft-mode .avatar-ring {
+  display: none;
+}
+
+/* El avatar es un bloque de pasto */
+body.minecraft-mode .avatar-core {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  border: 4px solid #000;
+  background:
+    linear-gradient(#6aa84f 0 22%, transparent 22%),
+    repeating-linear-gradient(90deg, transparent 0 12px, rgba(0, 0, 0, 0.12) 12px 24px),
+    linear-gradient(#866043, #6b4a32);
+  box-shadow: inset 4px 4px 0 rgba(255, 255, 255, 0.15), inset -4px -4px 0 rgba(0, 0, 0, 0.3);
+  font-size: 4rem;
+  color: #fff;
+  text-shadow: 4px 4px 0 var(--mc-shadow);
+}
+
+body.minecraft-mode .hero-title {
+  position: relative;
+  font-size: 2.6rem;
+  letter-spacing: 1px;
+}
+
+body.minecraft-mode .hero-name {
+  color: #fff;
+  text-shadow: 0 3px 0 #9a9a9a, 0 6px 0 #555, 6px 9px 0 rgba(0, 0, 0, 0.5);
+}
+
+body.minecraft-mode .hero-wave {
+  display: none;
+}
+
+/* Frase amarilla que late, inclinada como en el menú principal */
+.mc-splash {
+  display: none;
+}
+
+body.minecraft-mode .mc-splash {
+  display: block;
+  position: absolute;
+  left: calc(100% - 30px);
+  top: -22px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ffff00;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  text-shadow: 2px 2px 0 #3f3f00;
+  transform: rotate(-18deg);
+  animation: mc-splash 0.45s ease-in-out infinite alternate;
+}
+
+@keyframes mc-splash {
+  from { transform: rotate(-18deg) scale(1); }
+  to { transform: rotate(-18deg) scale(1.1); }
+}
+
+body.minecraft-mode .hero-role,
+body.minecraft-mode .hero-bio {
+  color: var(--mc-text);
+  font-weight: 400;
+}
+
+body.minecraft-mode .typewriter {
+  color: #ffff55;
+}
+
+/* Botones apilados y anchos, como "Un jugador" / "Multijugador" */
+body.minecraft-mode .hero-actions {
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+body.minecraft-mode .hero-btn {
+  width: min(400px, 85vw);
+  padding: 12px;
+  text-align: center;
+}
+
+body.minecraft-mode .scroll-cue {
+  border-radius: 0;
+  border-color: var(--mc-text);
+}
+
+/* --- Títulos --- */
+body.minecraft-mode .section-title {
+  color: #fff;
+  font-size: 2rem;
+  text-shadow: 3px 3px 0 var(--mc-shadow);
+}
+
+body.minecraft-mode .section-hint {
+  color: #bdbdbd;
+}
+
+/* --- Inventario de habilidades --- */
+body.minecraft-mode .skills-grid {
+  max-width: 760px;
+  gap: 4px;
+  padding: 14px;
+  background: var(--mc-panel);
+  border: 2px solid #000;
+  box-shadow: inset 3px 3px 0 #fff, inset -3px -3px 0 #555;
+}
+
+body.minecraft-mode .skill-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 0;
+  background: var(--mc-slot);
+  backdrop-filter: none;
+  box-shadow: inset 2px 2px 0 #373737, inset -2px -2px 0 #fff;
+  color: #fff;
+  text-shadow: 2px 2px 0 var(--mc-shadow);
+}
+
+/* Un "ítem" pixelado de color distinto en cada casillero */
+body.minecraft-mode .skill-item::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  background: hsl(calc(var(--i) * 27) 55% 50%);
+  box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.4), inset -2px -2px 0 rgba(0, 0, 0, 0.35);
+}
+
+body.minecraft-mode .skill-item:hover {
+  translate: none;
+  background: #a9a9a9;
+  border-color: transparent;
+  box-shadow: inset 2px 2px 0 #373737, inset -2px -2px 0 #fff;
+}
+
+body.minecraft-mode .skill-item.is-dragging {
+  scale: 1.08;
+  background: #a9a9a9;
+}
+
+/* --- Construcciones (proyectos) como paneles de GUI --- */
+body.minecraft-mode .project-card {
+  transform: none;
+  border-radius: 0;
+  border: 2px solid #000;
+  background: var(--mc-panel);
+  box-shadow: inset 3px 3px 0 #fff, inset -3px -3px 0 #555;
+  color: var(--mc-ink);
+  text-shadow: none;
+  transition: translate 0.15s steps(2);
+}
+
+body.minecraft-mode .project-card:hover:not(.locked) {
+  translate: 0 -4px;
+  border-color: #000;
+  box-shadow: inset 3px 3px 0 #fff, inset -3px -3px 0 #555, 6px 6px 0 rgba(0, 0, 0, 0.5);
+}
+
+body.minecraft-mode .project-card::before {
+  display: none;
+}
+
+body.minecraft-mode .project-card h3 {
+  color: var(--mc-ink);
+}
+
+body.minecraft-mode .description {
+  color: #555;
+}
+
+body.minecraft-mode .project-image {
+  border-radius: 0;
+  border: 2px solid #373737;
+  box-shadow: inset 0 0 0 2px #8b8b8b;
+}
+
+body.minecraft-mode .tag {
+  border-radius: 0;
+  background: var(--mc-slot);
+  color: #fff;
+  text-shadow: 1px 1px 0 var(--mc-shadow);
+  box-shadow: inset 1px 1px 0 #373737, inset -1px -1px 0 #fff;
+}
+
+body.minecraft-mode .project-card.locked {
+  opacity: 1;
+  border-style: solid;
+  background: #8b8b8b;
+}
+
+body.minecraft-mode .project-card.locked::after {
+  display: none;
+}
+
+body.minecraft-mode .lock-icon {
+  color: #555;
+  text-shadow: 3px 3px 0 #3a3a3a;
+}
+
+/* --- Contacto: cuadros de texto del chat --- */
+body.minecraft-mode .field input,
+body.minecraft-mode .field textarea {
+  border-radius: 0;
+  border: 2px solid #a0a0a0;
+  background: #000;
+  color: var(--mc-text);
+  box-shadow: none;
+}
+
+body.minecraft-mode .field input:focus,
+body.minecraft-mode .field textarea:focus {
+  border-color: #fff;
+}
+
+body.minecraft-mode .field label {
+  color: #a0a0a0;
+}
+
+body.minecraft-mode .form-success {
+  border-radius: 0;
+  border: 2px solid #000;
+  background: var(--mc-panel);
+  box-shadow: inset 3px 3px 0 #fff, inset -3px -3px 0 #555;
+  color: var(--mc-ink);
+  text-shadow: none;
+}
+
+body.minecraft-mode .whatsapp-container {
+  border-top: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+body.minecraft-mode .btn-whatsapp:hover {
+  box-shadow: inset 2px 2px 0 #b3bcf0, inset -2px -3px 0 #4c5690;
+}
+
+/* --- Barra rápida: los indicadores de sección son casilleros numerados --- */
+body.minecraft-mode .scroll-indicator {
+  gap: 4px;
+}
+
+body.minecraft-mode .scroll-indicator .line,
+body.minecraft-mode .scroll-indicator .line.active {
+  width: 40px;
+  height: 40px;
+  background: rgba(139, 139, 139, 0.75) !important;
+  box-shadow: inset 2px 2px 0 #373737, inset -2px -2px 0 #fff !important;
+}
+
+body.minecraft-mode .scroll-indicator .line.active {
+  outline: 3px solid #fff;
+  outline-offset: 1px;
+}
+
+body.minecraft-mode .line::before {
+  display: none;
+}
+
+body.minecraft-mode .line-num {
+  display: block;
+  position: absolute;
+  right: 4px;
+  bottom: 2px;
+  color: #fff;
+  font-size: 0.8rem;
+  text-shadow: 1px 1px 0 var(--mc-shadow);
+}
+
+body.minecraft-mode .line-label {
+  background: #100010;
+  border: 2px solid #2d0a63;
+  border-radius: 0;
+  text-shadow: 1px 1px 0 #000;
+}
+
+/* --- Barra de experiencia --- */
+body.minecraft-mode .scroll-progress {
+  top: auto;
+  bottom: 18px;
+  left: 50%;
+  right: auto;
+  width: min(360px, 50vw);
+  height: 10px;
+  translate: -50% 0;
+  background: #1b1b1b;
+  border: 2px solid #000;
+}
+
+body.minecraft-mode .scroll-progress-fill {
+  background: repeating-linear-gradient(90deg, #80ff20 0 calc(100% / 18 - 2px), #3a7a0a calc(100% / 18 - 2px) calc(100% / 18));
+  box-shadow: none;
+}
+
+body.minecraft-mode .scroll-progress-level {
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  translate: -50% 0;
+  color: #80ff20;
+  font-size: 1rem;
+  text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000;
+}
+
+/* --- Radio y selector --- */
+body.minecraft-mode .switch-btn,
+body.minecraft-mode .triggerButton {
+  border-radius: 0;
+}
+
+body.minecraft-mode .playerWindow,
+body.minecraft-mode .theme-menu {
+  border-radius: 0;
+  border: 2px solid #2d0a63;
+  background: rgba(16, 0, 16, 0.94);
+  box-shadow: 0 0 0 2px #100010;
+}
+
+body.minecraft-mode .trackItem {
+  border-radius: 0;
+  background: var(--mc-slot);
+  box-shadow: inset 2px 2px 0 #373737, inset -2px -2px 0 #fff;
+}
+
+body.minecraft-mode .trackItem.active {
+  border-color: transparent;
+  background: #a9a9a9;
+}
+
+body.minecraft-mode .progressBar,
+body.minecraft-mode .equalizer i {
+  background: #80ff20;
+  border-radius: 0;
+}
+
+body.minecraft-mode .theme-switch .theme-option {
+  border-radius: 0;
+}
+
+body.minecraft-mode .theme-switch .theme-option:hover {
+  background: rgba(123, 134, 194, 0.35);
+}
+
+@media (max-width: 768px) {
+  body.minecraft-mode .hero-title {
+    font-size: 1.7rem;
+  }
+
+  body.minecraft-mode .mc-splash {
+    left: auto;
+    right: -6px;
+    top: -26px;
+    font-size: 0.75rem;
+  }
+
+  /* En el celular tapaban el texto: alcanza con la barra de experiencia */
+  body.minecraft-mode .scroll-indicator {
+    display: none;
+  }
+
+  body.minecraft-mode .scroll-progress {
+    bottom: 34px;
+    width: 40vw;
+  }
+}

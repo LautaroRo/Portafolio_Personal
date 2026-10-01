@@ -1,7 +1,8 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useSyncExternalStore, ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useSyncExternalStore, ReactNode } from "react";
 import { THEMES, THEME_IDS, ThemeId, Theme, isThemeId, getTheme } from "../../constantes";
+import { getTextos } from "../../constantes/textos";
 
 const STORAGE_KEY = "portafolio-tema";
 const CHANGE_EVENT = "portafolio-tema-change";
@@ -54,7 +55,13 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     guardarTema(next);
   }, []);
 
-  // La clase en <body> es lo que activa los estilos de cada tema en globals.css.
+  // Link directo a un mundo: /?tema=silenthill
+  useEffect(() => {
+    const pedido = new URLSearchParams(window.location.search).get("tema");
+    if (isThemeId(pedido)) guardarTema(pedido);
+  }, []);
+
+  // La clase en <body> es lo que activa los estilos de cada tema (src/app/temas/).
   useEffect(() => {
     const clase = themeId ? THEMES[themeId].bodyClass : null;
     if (clase) document.body.classList.add(clase);
@@ -74,6 +81,11 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </ThemeContext.Provider>
   );
+};
+
+export const useTextos = () => {
+  const { themeId } = useTheme();
+  return useMemo(() => getTextos(themeId), [themeId]);
 };
 
 export const useTheme = () => {

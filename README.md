@@ -2,7 +2,9 @@
 
 Portafolio web hecho con **Next.js 16**, **React 19** y **TypeScript**.
 
-Además del modo normal tiene temas inspirados en videojuegos (Minecraft, Silent Hill 2, The Last of Us y Red Dead Redemption 2): cada uno cambia el video de fondo, la tipografía, el sonido de los botones y trae una radio con su banda sonora. El tema elegido queda guardado en el navegador.
+Además del modo profesional tiene cinco mundos inspirados en videojuegos: **Minecraft, Silent Hill 2, The Last of Us, Red Dead Redemption 2 y GTA VI**. Cada uno cambia la interfaz entera (textos, tipografías, tarjetas, botones y efectos como partículas, niebla, linterna o HUD), trae su pantalla de entrada, su sonido de clic y una radio con la banda sonora. El tema elegido queda guardado en el navegador.
+
+Se puede entrar directo a un mundo con `?tema=minecraft`, `silenthill`, `thelastofus`, `redead` o `gta6` (y `&intro=0` para saltear la pantalla de entrada).
 
 ## Secciones
 

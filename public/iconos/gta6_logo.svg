@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a0f4a"/>
+      <stop offset="0.55" stop-color="#ff3e8a"/>
+      <stop offset="1" stop-color="#ffb347"/>
+    </linearGradient>
+    <linearGradient id="sol" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe259"/>
+      <stop offset="1" stop-color="#ff5e8a"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="url(#cielo)"/>
+  <circle cx="32" cy="36" r="15" fill="url(#sol)"/>
+  <g fill="#2a0f4a">
+    <rect x="14" y="38" width="36" height="2"/>
+    <rect x="14" y="43" width="36" height="3"/>
+    <rect x="14" y="49" width="36" height="15"/>
+  </g>
+  <g fill="#1a0826">
+    <path d="M45 64 C46 52 47 44 46 34 L48 34 C49 44 48 52 48 64 Z"/>
+    <path d="M47 34 C42 30 37 30 34 33 C39 32 43 33 47 35 Z"/>
+    <path d="M47 34 C51 29 56 29 59 31 C55 31 51 33 47 35 Z"/>
+    <path d="M47 34 C44 27 40 25 36 26 C41 28 44 31 46 35 Z"/>
+    <path d="M47 34 C50 26 54 24 58 25 C54 27 50 30 48 35 Z"/>
+  </g>
+</svg>

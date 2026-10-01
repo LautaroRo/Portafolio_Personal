@@ -1,0 +1,299 @@
+/* --- Capas de ambiente de cada mundo --- */
+.fx-particles {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.fx-particles--petals {
+  image-rendering: pixelated;
+}
+
+/* Grano de película: ruido SVG que salta de lugar */
+.fx-grain {
+  position: fixed;
+  inset: -100%;
+  z-index: 9991;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.08;
+  animation: grain 0.6s steps(6) infinite;
+}
+
+.fx-grain--silenthill { opacity: 0.07; }
+.fx-grain--redead { opacity: 0.04; }
+.fx-grain--thelastofus { opacity: 0.03; }
+
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-6%, 4%); }
+  40% { transform: translate(5%, -7%); }
+  60% { transform: translate(-3%, 8%); }
+  80% { transform: translate(7%, 2%); }
+  100% { transform: translate(-4%, -5%); }
+}
+
+.fx-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.fx-vignette--green {
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(8, 14, 8, 0.45) 100%);
+}
+
+.fx-vignette--warm {
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(30, 14, 4, 0.4) 100%);
+}
+
+/* Niebla de Silent Hill: dos bancos que se cruzan despacio */
+.fx-fog {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.fx-fog span {
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse 30% 40% at 20% 30%, rgba(210, 210, 205, 0.1), transparent 70%),
+    radial-gradient(ellipse 25% 35% at 60% 70%, rgba(210, 210, 205, 0.08), transparent 70%),
+    radial-gradient(ellipse 35% 30% at 85% 40%, rgba(210, 210, 205, 0.08), transparent 70%);
+  filter: blur(20px);
+  animation: fog-drift 40s linear infinite alternate;
+}
+
+.fx-fog span:nth-child(2) {
+  top: 20%;
+  animation-duration: 55s;
+  animation-direction: alternate-reverse;
+  opacity: 0.8;
+}
+
+@keyframes fog-drift {
+  from { transform: translateX(-12%); }
+  to { transform: translateX(12%); }
+}
+
+/* Linterna: todo oscuro salvo un círculo alrededor del mouse */
+.fx-flashlight {
+  --fx: 50vw;
+  --fy: 40vh;
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 420px at var(--fx) var(--fy),
+    rgba(255, 244, 214, 0.06) 0%,
+    rgba(0, 0, 0, 0) 45%,
+    rgba(0, 0, 0, 0.22) 80%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  animation: flicker 7s infinite;
+}
+
+/* Parpadeo de pilas gastadas */
+@keyframes flicker {
+  0%, 91%, 93%, 96%, 100% { opacity: 1; }
+  92%, 95% { opacity: 0.55; }
+}
+
+@media (pointer: coarse) {
+  .fx-flashlight {
+    background: radial-gradient(ellipse at 50% 45%, transparent 50%, rgba(0, 0, 0, 0.35) 100%);
+  }
+}
+
+/* --- Pantallas de entrada --- */
+.fx-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  cursor: pointer;
+  text-align: center;
+  padding: 20px;
+  animation: intro-out 0.7s ease forwards;
+}
+
+@keyframes intro-out {
+  to { opacity: 0; visibility: hidden; }
+}
+
+/* Minecraft: pantalla de tierra con barra de carga */
+.fx-intro--minecraft {
+  animation-delay: 2s;
+  background-color: #3b2a1e;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%23866043'/%3E%3Cg fill='%23593d29'%3E%3Crect x='1' y='2' width='2' height='1'/%3E%3Crect x='6' y='0' width='1' height='2'/%3E%3Crect x='11' y='3' width='2' height='2'/%3E%3Crect x='3' y='7' width='1' height='2'/%3E%3Crect x='8' y='9' width='2' height='1'/%3E%3Crect x='13' y='8' width='1' height='1'/%3E%3Crect x='0' y='12' width='2' height='1'/%3E%3Crect x='5' y='13' width='1' height='2'/%3E%3Crect x='10' y='14' width='2' height='1'/%3E%3Crect x='14' y='12' width='1' height='2'/%3E%3C/g%3E%3Cg fill='%239b7653'%3E%3Crect x='4' y='3' width='1' height='1'/%3E%3Crect x='9' y='5' width='1' height='1'/%3E%3Crect x='1' y='9' width='1' height='1'/%3E%3Crect x='12' y='11' width='1' height='1'/%3E%3Crect x='7' y='15' width='1' height='1'/%3E%3Crect x='15' y='1' width='1' height='1'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 64px 64px;
+  image-rendering: pixelated;
+  box-shadow: inset 0 0 0 100vmax rgba(0, 0, 0, 0.55);
+  font-family: "MinecraftFont", monospace;
+}
+
+.mc-intro-title {
+  color: #fff;
+  font-size: 1.4rem;
+  text-shadow: 3px 3px 0 #3f3f3f;
+}
+
+.mc-intro-sub {
+  color: #a0a0a0;
+  text-shadow: 2px 2px 0 #2a2a2a;
+}
+
+.mc-intro-bar {
+  width: min(320px, 70vw);
+  height: 8px;
+  background: #3f3f3f;
+  border: 2px solid #000;
+}
+
+.mc-intro-bar span {
+  display: block;
+  height: 100%;
+  background: #80ff20;
+  animation: mc-load 1.9s steps(12) forwards;
+}
+
+@keyframes mc-load {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Silent Hill: negro, estática y una frase que aparece desde la niebla */
+.fx-intro--silenthill {
+  animation-delay: 2.6s;
+  animation-duration: 1.2s;
+  background: #000;
+}
+
+.fx-intro--silenthill::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.25;
+  animation: grain 0.3s steps(4) infinite, static-fade 2.6s ease forwards;
+}
+
+@keyframes static-fade {
+  0% { opacity: 0.5; }
+  25% { opacity: 0.1; }
+  100% { opacity: 0.18; }
+}
+
+.sh-intro-text {
+  position: relative;
+  color: #d6d6d6;
+  font-family: "NotoSerif", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.4rem, 4vw, 2.4rem);
+  letter-spacing: 2px;
+  animation: sh-text 2.6s ease both;
+}
+
+@keyframes sh-text {
+  0% { opacity: 0; filter: blur(12px); letter-spacing: 12px; }
+  50% { opacity: 1; filter: blur(0); letter-spacing: 2px; }
+  85% { opacity: 1; }
+  100% { opacity: 0.6; filter: blur(3px); }
+}
+
+/* The Last of Us: una luciérnaga que se enciende */
+.fx-intro--thelastofus {
+  animation-delay: 2.3s;
+  background: radial-gradient(ellipse at center, #121a10 0%, #050705 70%);
+}
+
+.tlou-intro-firefly {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #f4e27a;
+  box-shadow: 0 0 20px 8px rgba(244, 226, 122, 0.6), 0 0 60px 20px rgba(244, 226, 122, 0.25);
+  animation: firefly-blink 1.2s ease-in-out infinite alternate, firefly-wander 2.3s ease-in-out both;
+}
+
+@keyframes firefly-blink {
+  from { opacity: 0.25; }
+  to { opacity: 1; }
+}
+
+@keyframes firefly-wander {
+  0% { transform: translate(-80px, 40px) scale(0.5); }
+  50% { transform: translate(40px, -20px); }
+  100% { transform: translate(0, 0); }
+}
+
+.tlou-intro-text {
+  color: #eae6da;
+  font-family: "PressGothic", Impact, sans-serif;
+  font-size: clamp(1.6rem, 5vw, 3rem);
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  animation: hero-in 1.2s 0.5s ease both;
+}
+
+/* Red Dead: placa de capítulo con franjas de cine */
+.fx-intro--redead {
+  animation-delay: 2.4s;
+  background: #0c0907;
+  font-family: "ChineseRocks", Impact, sans-serif;
+}
+
+.fx-intro--redead::before,
+.fx-intro--redead::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 14vh;
+  background: #000;
+  animation: letterbox 0.8s ease both;
+}
+
+.fx-intro--redead::before { top: 0; }
+.fx-intro--redead::after { bottom: 0; }
+
+@keyframes letterbox {
+  from { height: 0; }
+}
+
+.rdr-intro-chapter {
+  color: #b3a58b;
+  font-size: 1rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  animation: hero-in 1s 0.3s ease both;
+}
+
+.rdr-intro-title {
+  color: #f1e9da;
+  font-size: clamp(2.4rem, 8vw, 5rem);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  animation: hero-in 1.2s 0.6s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-intro {
+    display: none;
+  }
+}

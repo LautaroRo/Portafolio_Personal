@@ -1,0 +1,457 @@
+/* =========================================================
+   GTA VI — atardecer en Leonida: neón rosa y cian, misiones,
+   HUD con plata y estrellas, y el contacto en un celular
+   ========================================================= */
+
+body.gta-mode {
+  --gt-pink: #ff3e8a;
+  --gt-orange: #ffb347;
+  --gt-cyan: #3ee6ff;
+  --gt-deep: #1a0836;
+  --gt-panel: rgba(26, 8, 54, 0.72);
+  --gt-sunset: linear-gradient(90deg, #ff3e8a, #ff8a3d, #ffd23f);
+  background: #120626;
+}
+
+body.gta-mode .page-shell {
+  background: transparent;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(26, 8, 54, 0.8);
+}
+
+body.gta-mode :is(.logo, h1, h2, h3, .section-title, .hero-btn, .btn-cta, .btn-enviar, .btn-action, .btn-whatsapp) {
+  font-family: var(--font-anton), Impact, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* Texto con degradado de atardecer */
+body.gta-mode :is(.hero-name, .section-title) {
+  background: var(--gt-sunset);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 3px 0 rgba(26, 8, 54, 0.9)) drop-shadow(0 0 18px rgba(255, 62, 138, 0.45));
+}
+
+/* --- Botones: píldoras de neón --- */
+body.gta-mode :is(.btn-cta, .hero-btn, .btn-enviar, .btn-whatsapp) {
+  border: none;
+  border-radius: 999px;
+  background: var(--gt-sunset);
+  color: var(--gt-deep);
+  text-shadow: none;
+  box-shadow: 0 6px 24px rgba(255, 62, 138, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+body.gta-mode :is(.btn-cta, .hero-btn, .btn-enviar, .btn-whatsapp):hover {
+  transform: translateY(-3px) scale(1.03);
+  color: var(--gt-deep);
+  filter: saturate(1.2);
+  box-shadow: 0 10px 34px rgba(255, 62, 138, 0.65), 0 0 0 2px var(--gt-cyan);
+}
+
+body.gta-mode .hero-btn:not(.hero-btn--primary) {
+  background: rgba(26, 8, 54, 0.6);
+  color: #fff;
+  box-shadow: inset 0 0 0 2px var(--gt-cyan), 0 0 22px rgba(62, 230, 255, 0.35);
+}
+
+body.gta-mode .hero-btn:not(.hero-btn--primary):hover {
+  color: #fff;
+  background: rgba(62, 230, 255, 0.15);
+}
+
+/* --- Navbar --- */
+body.gta-mode .logo {
+  font-size: 1.8rem;
+  letter-spacing: 3px;
+}
+
+body.gta-mode .nav-links {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+body.gta-mode .nav-links a {
+  color: #ffd6ec;
+  font-weight: 600;
+}
+
+body.gta-mode .nav-links a:hover {
+  color: var(--gt-cyan);
+  text-shadow: 0 0 12px rgba(62, 230, 255, 0.8);
+}
+
+/* --- Hero --- */
+body.gta-mode .hero-kicker {
+  margin-bottom: 22px;
+  color: var(--gt-cyan);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  text-shadow: 0 0 14px rgba(62, 230, 255, 0.7);
+}
+
+body.gta-mode .avatar-ring {
+  background: conic-gradient(from 0deg, var(--gt-pink), var(--gt-orange), var(--gt-cyan), var(--gt-pink));
+}
+
+body.gta-mode .avatar-core {
+  background: radial-gradient(circle at 35% 30%, #3a1466, var(--gt-deep) 70%);
+  font-family: var(--font-anton), Impact, sans-serif;
+  font-weight: 400;
+}
+
+body.gta-mode .hero-title {
+  font-size: 4rem;
+  line-height: 1.05;
+}
+
+body.gta-mode .hero-wave {
+  display: none;
+}
+
+body.gta-mode .hero-role {
+  color: #ffe0f0;
+  font-weight: 600;
+}
+
+body.gta-mode .typewriter {
+  color: var(--gt-cyan);
+}
+
+body.gta-mode .hero-bio {
+  color: #fff;
+  font-weight: 400;
+}
+
+body.gta-mode .scroll-cue {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* --- Títulos --- */
+body.gta-mode .section-title {
+  font-size: 3rem;
+}
+
+body.gta-mode .section-hint {
+  color: #ffd6ec;
+}
+
+/* --- Stats (habilidades): píldoras de neón alternadas --- */
+body.gta-mode .skill-item {
+  border-radius: 999px;
+  border: 2px solid var(--gt-pink);
+  background: var(--gt-panel);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 0 14px rgba(255, 62, 138, 0.35), inset 0 0 10px rgba(255, 62, 138, 0.2);
+}
+
+body.gta-mode .skill-item:nth-child(even) {
+  border-color: var(--gt-cyan);
+  box-shadow: 0 0 14px rgba(62, 230, 255, 0.35), inset 0 0 10px rgba(62, 230, 255, 0.2);
+}
+
+body.gta-mode .skill-item:hover {
+  background: rgba(255, 62, 138, 0.25);
+  border-color: #fff;
+  box-shadow: 0 0 24px rgba(255, 62, 138, 0.7);
+}
+
+/* --- Misiones (proyectos) --- */
+body.gta-mode .bento-grid {
+  counter-reset: mision;
+}
+
+body.gta-mode .project-card {
+  counter-increment: mision;
+  border: none;
+  border-radius: 18px;
+  background:
+    linear-gradient(var(--gt-panel), var(--gt-panel)) padding-box,
+    linear-gradient(135deg, var(--gt-pink), var(--gt-orange), var(--gt-cyan)) border-box;
+  border: 2px solid transparent;
+  backdrop-filter: blur(8px);
+  color: #fff;
+}
+
+body.gta-mode .project-card:hover:not(.locked) {
+  border-color: transparent;
+  box-shadow: 0 25px 50px rgba(26, 8, 54, 0.7), 0 0 40px rgba(255, 62, 138, 0.35);
+}
+
+body.gta-mode .project-card::before {
+  background: radial-gradient(380px circle at var(--mx) var(--my), rgba(62, 230, 255, 0.14), transparent 45%);
+}
+
+body.gta-mode .project-card h3 {
+  font-size: 1.8rem;
+}
+
+body.gta-mode .project-card h3::before {
+  content: "Misión " counter(mision, decimal-leading-zero);
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--gt-cyan);
+}
+
+body.gta-mode .description {
+  color: #ffe0f0;
+}
+
+body.gta-mode .project-image {
+  border-radius: 12px;
+}
+
+body.gta-mode .tag {
+  border-radius: 999px;
+  background: rgba(255, 62, 138, 0.18);
+  color: #ffd6ec;
+}
+
+body.gta-mode .btn-action {
+  border-radius: 999px;
+  border: 2px solid rgba(62, 230, 255, 0.5);
+  background: transparent;
+  font-size: 1rem;
+}
+
+body.gta-mode a.btn-action:hover {
+  background: var(--gt-cyan);
+  border-color: var(--gt-cyan);
+  color: var(--gt-deep);
+}
+
+body.gta-mode .project-card.locked {
+  opacity: 0.85;
+}
+
+body.gta-mode .lock-icon {
+  font-family: var(--font-anton), Impact, sans-serif;
+  color: rgba(255, 62, 138, 0.35);
+}
+
+/* --- Teléfono (contacto): el formulario es un celular --- */
+body.gta-mode .contact-form {
+  position: relative;
+  max-width: 380px;
+  margin-inline: auto;
+  padding: 46px 22px 28px;
+  border-radius: 40px;
+  background: linear-gradient(180deg, #2a0d4f, #12052a);
+  box-shadow: 0 0 0 10px #0c0418, 0 0 0 12px rgba(255, 62, 138, 0.6), 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* Muesca del celular */
+body.gta-mode .contact-form::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  width: 90px;
+  height: 18px;
+  translate: -50% 0;
+  border-radius: 999px;
+  background: #0c0418;
+}
+
+body.gta-mode .field input,
+body.gta-mode .field textarea {
+  border-radius: 18px;
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+body.gta-mode .field input:focus,
+body.gta-mode .field textarea:focus {
+  border-color: var(--gt-cyan);
+  box-shadow: 0 0 0 4px rgba(62, 230, 255, 0.15);
+}
+
+body.gta-mode .field label {
+  color: #d9b8e8;
+}
+
+/* Al enviar: cartel de misión completada */
+body.gta-mode .form-success {
+  border: none;
+  border-radius: 24px;
+  background: var(--gt-panel);
+}
+
+body.gta-mode .form-success::before {
+  content: "¡Misión completada!";
+  font-family: var(--font-anton), Impact, sans-serif;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  background: var(--gt-sunset);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: pop-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+body.gta-mode .success-icon {
+  color: var(--gt-cyan);
+}
+
+body.gta-mode .whatsapp-container {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- HUD: plata y estrellas arriba a la derecha --- */
+.gta-hud {
+  position: fixed;
+  top: 18px;
+  right: 24px;
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  pointer-events: none;
+  animation: fade-down 0.6s 0.4s ease both;
+}
+
+.gta-stars {
+  display: flex;
+  gap: 4px;
+}
+
+.gta-stars i {
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.25);
+  clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.gta-stars i.on {
+  background: #fff;
+  transform: scale(1.1);
+  animation: star-flash 1s ease-in-out infinite alternate;
+}
+
+@keyframes star-flash {
+  from { background: #fff; }
+  to { background: var(--gt-orange); }
+}
+
+.gta-money {
+  font-family: var(--font-anton), Impact, sans-serif;
+  font-size: 1.9rem;
+  line-height: 1;
+  color: #7dff7a;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0 #0a3d12, 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+/* En GTA la barra de lectura la reemplaza el HUD */
+body.gta-mode .scroll-progress {
+  display: none;
+}
+
+body.gta-mode .navbar {
+  padding-right: 150px;
+}
+
+body.gta-mode .line.active::before {
+  background: var(--gt-pink);
+  box-shadow: 0 0 10px rgba(255, 62, 138, 0.9);
+}
+
+/* --- Controles --- */
+body.gta-mode .switch-btn,
+body.gta-mode .triggerButton {
+  background: var(--gt-deep);
+  border: 2px solid var(--gt-pink);
+  box-shadow: 0 0 18px rgba(255, 62, 138, 0.5);
+}
+
+body.gta-mode .theme-menu,
+body.gta-mode .playerWindow {
+  border-color: rgba(255, 62, 138, 0.5);
+  background: rgba(26, 8, 54, 0.95);
+}
+
+/* --- Intro: postal de bienvenida --- */
+.fx-intro.fx-intro--gta6 {
+  animation-delay: 2.4s;
+  background: linear-gradient(180deg, #120626 0%, #5a1670 45%, #ff4e8a 75%, #ffb347 100%);
+  gap: 4px;
+}
+
+.gta-intro-welcome {
+  color: #fff;
+  font-family: var(--font-anton), Impact, sans-serif;
+  font-size: clamp(1rem, 3vw, 1.6rem);
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  animation: hero-in 0.9s 0.2s ease both;
+}
+
+.gta-intro-title {
+  font-family: var(--font-pacifico), cursive;
+  font-size: clamp(4rem, 14vw, 9rem);
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255, 62, 138, 0.9), 0 0 50px rgba(255, 62, 138, 0.6), 4px 4px 0 #3a0f5c;
+  animation: neon-on 1.4s 0.5s ease both;
+}
+
+@keyframes neon-on {
+  0% { opacity: 0; transform: scale(0.85) rotate(-6deg); }
+  20% { opacity: 1; }
+  25% { opacity: 0.3; }
+  35% { opacity: 1; }
+  40% { opacity: 0.5; }
+  55%, 100% { opacity: 1; transform: rotate(-6deg); }
+}
+
+.gta-intro-sub {
+  color: #3ee6ff;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  text-shadow: 0 0 12px rgba(62, 230, 255, 0.8);
+  animation: hero-in 0.9s 1.2s ease both;
+}
+
+@media (max-width: 768px) {
+  body.gta-mode .hero-title {
+    font-size: 2.6rem;
+  }
+
+  body.gta-mode .section-title {
+    font-size: 2.2rem;
+  }
+
+  body.gta-mode .navbar {
+    padding-right: 0;
+    padding-top: 70px;
+  }
+
+  .gta-hud {
+    top: 12px;
+    right: 14px;
+  }
+
+  .gta-money {
+    font-size: 1.4rem;
+  }
+
+  .gta-stars i {
+    width: 15px;
+    height: 15px;
+  }
+}

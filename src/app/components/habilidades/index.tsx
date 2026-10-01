@@ -20,6 +20,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import Reveal from "../reveal";
+import { useTextos } from "../../../context/tema";
 import "./estilos.css";
 
 const SKILLS = [
@@ -51,6 +52,7 @@ function SkillItem({ id, index }: { id: string; index: number }) {
 }
 
 export default function Habilidades() {
+  const t = useTextos();
   const [skills, setSkills] = useState(SKILLS);
   // id estable entre servidor y cliente: evita el error de hidratación de dnd-kit
   const dndId = useId();
@@ -73,10 +75,10 @@ export default function Habilidades() {
   return (
     <section id="habilidades" className="habilidades-container">
       <Reveal as="h2" className="section-title">
-        Inventario de Habilidades
+        {t["skills.title"]}
       </Reveal>
       <Reveal as="p" className="section-hint" delay={100}>
-        Arrastralas para ordenarlas a tu gusto
+        {t["skills.hint"]}
       </Reveal>
 
       <DndContext id={dndId} sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>

@@ -1,0 +1,527 @@
+/* =========================================================
+   RED DEAD REDEMPTION 2 — cartel de "SE BUSCA", recortes
+   de diario, telegrama y pinceladas rojas en el menú
+   ========================================================= */
+
+@font-face {
+  font-family: "ChineseRocks";
+  src: url("/fonts/chineserocksrg.otf") format("opentype");
+  font-display: swap;
+}
+
+body.redead-mode {
+  --rd-paper: #e9dfc7;
+  --rd-paper-dark: #d6c7a4;
+  --rd-ink: #2a1f16;
+  --rd-red: #9e1b17;
+  --rd-text: #f1e9da;
+  --rd-dim: #b3a58b;
+  --rd-serif: Georgia, "Times New Roman", serif;
+  background: #120e0b;
+}
+
+body.redead-mode .page-shell {
+  background: rgba(18, 10, 4, 0.12);
+  color: var(--rd-text);
+}
+
+body.redead-mode :is(.logo, .nav-links a, .btn-cta, .hero-btn, .btn-enviar, .btn-action, .btn-whatsapp, .section-title, .section-hint, .skill-item, .tag, .theme-option, .playerWindow) {
+  font-family: "ChineseRocks", Impact, sans-serif;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+/* Papel envejecido, compartido por cartel, recortes y telegrama */
+body.redead-mode :is(.info-content, .project-card, .contact-form, .form-success) {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(120, 80, 30, 0.18), transparent 25%),
+    radial-gradient(circle at 80% 75%, rgba(100, 60, 20, 0.2), transparent 30%),
+    radial-gradient(ellipse at center, transparent 50%, rgba(90, 55, 20, 0.45) 100%),
+    var(--rd-paper);
+  color: var(--rd-ink);
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65), inset 0 0 40px rgba(110, 70, 25, 0.35);
+}
+
+/* --- Botones: pincelada roja al pasar el mouse --- */
+body.redead-mode :is(.btn-cta, .hero-btn, .btn-enviar, .btn-whatsapp) {
+  border: none;
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.45);
+  color: var(--rd-text);
+  font-size: 1.05rem;
+  box-shadow: none;
+  clip-path: polygon(1% 8%, 12% 0, 40% 6%, 70% 1%, 99% 6%, 100% 50%, 98% 94%, 70% 100%, 35% 95%, 8% 100%, 0 70%);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+body.redead-mode :is(.btn-cta, .hero-btn, .btn-enviar, .btn-whatsapp):hover {
+  background: var(--rd-red);
+  color: #fff;
+  transform: none;
+  box-shadow: none;
+}
+
+body.redead-mode .btn-cta::before {
+  display: none;
+}
+
+/* --- Navbar --- */
+body.redead-mode .logo {
+  font-size: 1.7rem;
+  letter-spacing: 6px;
+}
+
+body.redead-mode .nav-links {
+  border-top: 1px solid rgba(241, 233, 218, 0.2);
+}
+
+body.redead-mode .nav-links a {
+  color: var(--rd-dim);
+  font-size: 1.05rem;
+}
+
+body.redead-mode .nav-links a:hover {
+  color: var(--rd-text);
+}
+
+body.redead-mode .nav-links a::after {
+  background: var(--rd-red);
+  height: 2px;
+}
+
+/* --- Hero: cartel de SE BUSCA clavado en la pared --- */
+body.redead-mode .info-content {
+  position: relative;
+  max-width: 560px;
+  padding: 34px 44px 38px;
+  rotate: -1deg;
+}
+
+/* Clavos */
+body.redead-mode .info-content::before,
+body.redead-mode .info-content::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #9a8f80, #3a332b 70%);
+  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+body.redead-mode .info-content::before { left: 14px; }
+body.redead-mode .info-content::after { right: 14px; }
+
+.wanted-head,
+.wanted-reward {
+  display: none;
+}
+
+body.redead-mode .wanted-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+  border-bottom: 3px double var(--rd-ink);
+}
+
+body.redead-mode .wanted-title {
+  font-family: var(--font-rye), var(--rd-serif);
+  font-size: 4.2rem;
+  line-height: 1;
+  color: var(--rd-ink);
+  letter-spacing: 4px;
+}
+
+body.redead-mode .wanted-sub {
+  margin-top: 8px;
+  font-family: "ChineseRocks", Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--rd-red);
+}
+
+body.redead-mode .avatar {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 18px;
+}
+
+body.redead-mode .avatar-ring {
+  display: none;
+}
+
+/* Retrato en sepia, como un daguerrotipo */
+body.redead-mode .avatar-core {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  border: 3px solid var(--rd-ink);
+  background: radial-gradient(circle at 50% 35%, #8a6a45, #3b2a1a 75%);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6);
+  font-family: var(--font-rye), var(--rd-serif);
+  font-weight: 400;
+  color: var(--rd-paper);
+  animation: none;
+}
+
+body.redead-mode .hero-title {
+  font-family: var(--font-rye), var(--rd-serif);
+  font-weight: 400;
+  font-size: 2.3rem;
+  letter-spacing: 1px;
+  color: var(--rd-ink);
+}
+
+body.redead-mode .hero-name {
+  color: var(--rd-red);
+}
+
+body.redead-mode .hero-wave {
+  display: none;
+}
+
+body.redead-mode .hero-role {
+  font-family: var(--rd-serif);
+  font-style: italic;
+  color: #4a3a2a;
+}
+
+body.redead-mode .typewriter {
+  color: var(--rd-ink);
+}
+
+body.redead-mode .hero-bio {
+  font-family: var(--rd-serif);
+  color: #3b2e22;
+  font-weight: 400;
+}
+
+body.redead-mode .wanted-reward {
+  display: block;
+  margin-top: 20px;
+  padding-top: 14px;
+  width: 100%;
+  border-top: 3px double var(--rd-ink);
+  font-family: var(--font-rye), var(--rd-serif);
+  font-size: 1.15rem;
+  color: var(--rd-ink);
+}
+
+body.redead-mode .wanted-reward strong {
+  color: var(--rd-red);
+  font-weight: 400;
+}
+
+body.redead-mode .hero-actions {
+  margin-top: 22px;
+}
+
+body.redead-mode .hero-btn {
+  background: var(--rd-ink);
+  color: var(--rd-paper);
+}
+
+body.redead-mode .scroll-cue {
+  border-color: rgba(241, 233, 218, 0.4);
+}
+
+/* --- Títulos con adornos --- */
+body.redead-mode .section-title {
+  font-size: 2.6rem;
+  letter-spacing: 5px;
+  color: var(--rd-text);
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+}
+
+body.redead-mode .section-title::before,
+body.redead-mode .section-title::after {
+  content: "✦";
+  margin: 0 18px;
+  font-size: 1rem;
+  vertical-align: middle;
+  color: var(--rd-red);
+}
+
+body.redead-mode .section-hint {
+  color: var(--rd-dim);
+  font-size: 0.95rem;
+}
+
+/* --- Alforja (habilidades): etiquetas de papel atadas --- */
+body.redead-mode .skill-item {
+  border-radius: 0;
+  border: 1px dashed rgba(42, 31, 22, 0.5);
+  background: var(--rd-paper);
+  color: var(--rd-ink);
+  font-size: 1rem;
+  backdrop-filter: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+  rotate: calc((var(--i) - 7) * 0.4deg);
+}
+
+body.redead-mode .skill-item:hover {
+  border-color: var(--rd-red);
+  background: #f3ead6;
+  rotate: 0deg;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Diario de trabajos (proyectos): recortes de diario --- */
+body.redead-mode .bento-grid {
+  counter-reset: edicion;
+}
+
+body.redead-mode .project-card {
+  counter-increment: edicion;
+  transform: none;
+  padding: 22px;
+  transition: rotate 0.35s ease, translate 0.35s ease, box-shadow 0.35s ease;
+}
+
+body.redead-mode .bento-grid > :nth-child(odd) .project-card { rotate: -0.8deg; }
+body.redead-mode .bento-grid > :nth-child(even) .project-card { rotate: 0.8deg; }
+
+body.redead-mode .project-card:hover:not(.locked) {
+  rotate: 0deg;
+  translate: 0 -6px;
+  box-shadow: 0 28px 55px rgba(0, 0, 0, 0.7), inset 0 0 40px rgba(110, 70, 25, 0.35);
+}
+
+/* Cabecera del diario, arriba de todo (el ::before es el primer hijo del flex) */
+body.redead-mode .project-card::before {
+  content: "Diario del Oeste · Edición Nº " counter(edicion);
+  position: static;
+  inset: auto;
+  opacity: 1;
+  background: none;
+  display: block;
+  margin-bottom: 14px;
+  padding: 5px 0;
+  border-top: 3px double var(--rd-ink);
+  border-bottom: 1px solid var(--rd-ink);
+  text-align: center;
+  font-family: "ChineseRocks", Impact, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #5a4632;
+}
+
+body.redead-mode .project-card h3 {
+  font-family: var(--font-rye), var(--rd-serif);
+  font-weight: 400;
+  font-size: 1.6rem;
+  text-align: center;
+  color: var(--rd-ink);
+  padding-bottom: 8px;
+  border-bottom: 3px double var(--rd-ink);
+}
+
+body.redead-mode .description {
+  font-family: var(--rd-serif);
+  color: #3b2e22;
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* Letra capital */
+body.redead-mode .description::first-letter {
+  float: left;
+  margin: 4px 6px 0 0;
+  font-family: var(--font-rye), var(--rd-serif);
+  font-size: 2.6rem;
+  line-height: 0.8;
+  color: var(--rd-red);
+}
+
+body.redead-mode .project-image {
+  border-radius: 0;
+  border: 2px solid var(--rd-ink);
+  background: #3b2a1a;
+}
+
+body.redead-mode .project-image img {
+  filter: sepia(0.8) contrast(1.1) brightness(0.9);
+  transition: filter 1s ease, transform 0.7s ease, object-position 2.5s ease;
+}
+
+body.redead-mode .project-card:hover .project-image img {
+  filter: sepia(0.25);
+}
+
+body.redead-mode .tag {
+  border-radius: 0;
+  background: transparent;
+  border: 1px solid rgba(42, 31, 22, 0.55);
+  color: var(--rd-ink);
+  font-size: 0.8rem;
+}
+
+body.redead-mode .btn-action {
+  border-radius: 0;
+  border: none;
+  background: var(--rd-ink);
+  color: var(--rd-paper);
+  font-size: 0.95rem;
+}
+
+body.redead-mode a.btn-action:hover {
+  background: var(--rd-red);
+  color: #fff;
+}
+
+body.redead-mode .btn-action--muted {
+  background: rgba(42, 31, 22, 0.15);
+  color: #5a4632;
+}
+
+body.redead-mode .project-card.locked {
+  opacity: 0.85;
+  border-style: solid;
+}
+
+body.redead-mode .project-card.locked::after {
+  display: none;
+}
+
+body.redead-mode .project-card.locked::before {
+  content: "Próxima edición";
+}
+
+body.redead-mode .lock-icon {
+  font-family: var(--font-rye), var(--rd-serif);
+  color: rgba(42, 31, 22, 0.25);
+}
+
+/* --- Telegrama (contacto) --- */
+body.redead-mode .contact-form {
+  padding: 26px 26px 30px;
+}
+
+body.redead-mode .contact-form::before {
+  content: "Telégrafo del Oeste · Mensaje";
+  display: block;
+  padding-bottom: 10px;
+  border-bottom: 3px double var(--rd-ink);
+  text-align: center;
+  font-family: var(--font-rye), var(--rd-serif);
+  font-size: 1.1rem;
+  color: var(--rd-ink);
+}
+
+body.redead-mode .field input,
+body.redead-mode .field textarea {
+  border: none;
+  border-bottom: 1px solid rgba(42, 31, 22, 0.6);
+  border-radius: 0;
+  background: rgba(255, 250, 235, 0.35);
+  color: var(--rd-ink);
+  font-family: var(--rd-serif);
+}
+
+body.redead-mode .field input:focus,
+body.redead-mode .field textarea:focus {
+  background: rgba(255, 250, 235, 0.6);
+  border-bottom-color: var(--rd-red);
+  box-shadow: none;
+}
+
+body.redead-mode .field label {
+  color: #6b5640;
+  font-family: var(--rd-serif);
+  font-style: italic;
+}
+
+body.redead-mode .btn-enviar {
+  background: var(--rd-ink);
+  color: var(--rd-paper);
+}
+
+body.redead-mode .form-error {
+  color: var(--rd-red);
+}
+
+body.redead-mode .form-success {
+  padding: 30px;
+}
+
+body.redead-mode .form-success p {
+  color: #4a3a2a;
+}
+
+body.redead-mode .success-icon {
+  color: var(--rd-red);
+}
+
+body.redead-mode .whatsapp-container {
+  border-top-color: rgba(241, 233, 218, 0.2);
+  color: var(--rd-dim);
+}
+
+/* --- Indicadores, barra y controles --- */
+body.redead-mode .line.active::before {
+  background: var(--rd-red);
+  box-shadow: 0 0 8px rgba(158, 27, 23, 0.8);
+}
+
+body.redead-mode .scroll-progress-fill {
+  background: var(--rd-red);
+  box-shadow: none;
+}
+
+body.redead-mode .switch-btn,
+body.redead-mode .triggerButton {
+  background: #1d1712;
+  border-color: #5a4632;
+}
+
+body.redead-mode .playerWindow,
+body.redead-mode .theme-menu {
+  border-radius: 0;
+  border-color: #5a4632;
+  background: rgba(20, 14, 9, 0.96);
+}
+
+body.redead-mode .trackItem {
+  border-radius: 0;
+  background: #2a2018;
+}
+
+body.redead-mode .trackItem.active {
+  border-color: var(--rd-red);
+}
+
+body.redead-mode .progressBar,
+body.redead-mode .equalizer i {
+  background: var(--rd-red);
+}
+
+@media (max-width: 768px) {
+  body.redead-mode .info-content {
+    padding: 26px 20px 30px;
+  }
+
+  body.redead-mode .wanted-title {
+    font-size: 2.8rem;
+  }
+
+  body.redead-mode .hero-title {
+    font-size: 1.7rem;
+  }
+
+  body.redead-mode .section-title {
+    font-size: 1.8rem;
+  }
+
+  body.redead-mode .section-title::before,
+  body.redead-mode .section-title::after {
+    margin: 0 8px;
+  }
+}

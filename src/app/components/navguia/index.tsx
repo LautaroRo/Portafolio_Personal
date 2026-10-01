@@ -1,16 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTextos } from "../../../context/tema";
+import type { TextoKey } from "../../../constantes/textos";
 import "./estilos.css";
 
-const SECCIONES = [
-  { id: "info", label: "Información" },
-  { id: "habilidades", label: "Habilidades" },
-  { id: "proyectos", label: "Proyectos" },
-  { id: "contacto", label: "Contacto" },
+const SECCIONES: { id: string; key: TextoKey }[] = [
+  { id: "info", key: "nav.info" },
+  { id: "habilidades", key: "nav.skills" },
+  { id: "proyectos", key: "nav.projects" },
+  { id: "contacto", key: "nav.contact" },
 ];
 
 export default function NavGuia() {
+  const t = useTextos();
   const [active, setActive] = useState("info");
 
   // Marca la sección que cruza la mitad de la pantalla, sin recalcular en cada evento de scroll.
@@ -38,16 +41,20 @@ export default function NavGuia() {
 
   return (
     <nav className="scroll-indicator" aria-label="Secciones">
-      {SECCIONES.map(({ id, label }) => (
+      {SECCIONES.map(({ id, key }, i) => (
+        // El número solo se ve en el tema Minecraft, como los casilleros de la barra rápida
         <button
           key={id}
           type="button"
           className={`line ${active === id ? "active" : ""}`}
           onClick={() => handleClick(id)}
-          aria-label={label}
+          aria-label={t[key]}
           aria-current={active === id ? "true" : undefined}
         >
-          <span className="line-label">{label}</span>
+          <span className="line-num" aria-hidden>
+            {i + 1}
+          </span>
+          <span className="line-label">{t[key]}</span>
         </button>
       ))}
     </nav>

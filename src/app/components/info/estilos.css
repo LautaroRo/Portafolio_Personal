@@ -26,6 +26,8 @@
 .info-content > :nth-child(3) { animation-delay: 0.4s; }
 .info-content > :nth-child(4) { animation-delay: 0.55s; }
 .info-content > :nth-child(5) { animation-delay: 0.7s; }
+.info-content > :nth-child(6) { animation-delay: 0.85s; }
+.info-content > :nth-child(7) { animation-delay: 1s; }
 
 @keyframes hero-in {
   from { opacity: 0; transform: translateY(28px); filter: blur(6px); }

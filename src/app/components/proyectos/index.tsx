@@ -4,6 +4,7 @@ import Image from "next/image";
 import { MouseEvent } from "react";
 import { Globe, Lock } from "lucide-react";
 import Reveal from "../reveal";
+import { useTextos } from "../../../context/tema";
 import "./estilos.css";
 
 type Proyecto = {
@@ -58,10 +59,12 @@ const GitHubIcon = () => (
 );
 
 export default function Proyectos() {
+  const t = useTextos();
+
   return (
     <section id="proyectos" className="proyectos-container">
       <Reveal as="h2" className="section-title">
-        Inventario de Proyectos
+        {t["projects.title"]}
       </Reveal>
 
       <div className="proyectos-wrapper">
@@ -92,7 +95,7 @@ export default function Proyectos() {
 
                   <div className="project-actions">
                     <a href={p.linkWeb} target="_blank" rel="noopener noreferrer" className="btn-action">
-                      <Globe size={17} /> Sitio Web
+                      <Globe size={17} /> {t["projects.web"]}
                     </a>
 
                     {p.linkGit ? (
@@ -101,7 +104,7 @@ export default function Proyectos() {
                       </a>
                     ) : (
                       <span className="btn-action btn-action--muted" title="El código de este proyecto es privado">
-                        <Lock size={16} /> Privado
+                        <Lock size={16} /> {t["projects.private"]}
                       </span>
                     )}
                   </div>
@@ -117,9 +120,9 @@ export default function Proyectos() {
               </div>
               <div className="card-content">
                 <h3>???</h3>
-                <p className="description">Slot en desarrollo. Próximamente se revelará un nuevo proyecto.</p>
+                <p className="description">{t["projects.locked"]}</p>
                 <div className="tags-container">
-                  <span className="tag">Próximamente</span>
+                  <span className="tag">{t["projects.soon"]}</span>
                 </div>
               </div>
             </article>

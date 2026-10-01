@@ -1,0 +1,163 @@
+.vice-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: linear-gradient(180deg, #120626 0%, #3a0f5c 28%, #8a1f78 46%, #ff4e8a 58%, #ffb347 64%);
+  animation: video-in 1.2s ease both;
+}
+
+/* Estrellas que titilan arriba */
+.vice-stars {
+  position: absolute;
+  inset: 0 0 55%;
+  background-image:
+    radial-gradient(1px 1px at 12% 20%, #fff, transparent),
+    radial-gradient(1px 1px at 28% 8%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 44% 26%, #ffd6f0, transparent),
+    radial-gradient(1px 1px at 61% 12%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 77% 22%, #cdeeff, transparent),
+    radial-gradient(1px 1px at 90% 6%, #fff, transparent),
+    radial-gradient(1px 1px at 6% 40%, #fff, transparent),
+    radial-gradient(1px 1px at 53% 44%, #fff, transparent);
+  animation: vice-twinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes vice-twinkle {
+  from { opacity: 0.35; }
+  to { opacity: 1; }
+}
+
+/* Sol retro con franjas, que baja y sube despacio */
+.vice-sun {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  width: min(46vmin, 520px);
+  aspect-ratio: 1;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #fff3a8 0%, #ffd23f 35%, #ff8a3d 65%, #ff3e8a 100%);
+  -webkit-mask: linear-gradient(#000 0 52%, transparent 52% 55%, #000 55% 63%, transparent 63% 67%, #000 67% 74%, transparent 74% 79%, #000 79% 85%, transparent 85% 91%, #000 91%);
+  mask: linear-gradient(#000 0 52%, transparent 52% 55%, #000 55% 63%, transparent 63% 67%, #000 67% 74%, transparent 74% 79%, #000 79% 85%, transparent 85% 91%, #000 91%);
+  filter: drop-shadow(0 0 60px rgba(255, 120, 90, 0.7));
+  animation: vice-sun 14s ease-in-out infinite alternate;
+}
+
+@keyframes vice-sun {
+  from { transform: translateY(0); }
+  to { transform: translateY(5%); }
+}
+
+.vice-skyline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 36%;
+  width: 100%;
+  height: 22%;
+  fill: #1f0838;
+  filter: drop-shadow(0 -2px 12px rgba(255, 78, 138, 0.35));
+}
+
+.vice-window {
+  fill: #ffcf6e;
+  animation: vice-window 5s steps(1) infinite;
+}
+
+.vice-window:nth-of-type(3n) {
+  fill: #ff6ec7;
+}
+
+.vice-window:nth-of-type(4n) {
+  fill: #6ee7ff;
+}
+
+@keyframes vice-window {
+  0%, 70% { opacity: 1; }
+  71%, 85% { opacity: 0.2; }
+  86% { opacity: 1; }
+}
+
+/* Mar con el reflejo del sol */
+.vice-sea {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 36%;
+  overflow: hidden;
+  background: linear-gradient(180deg, #ff6f91 0%, #7a1f6e 18%, #2a0b48 60%, #0d0420 100%);
+}
+
+.vice-reflection {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: min(40vmin, 440px);
+  height: 100%;
+  translate: -50% 0;
+  background: repeating-linear-gradient(180deg, rgba(255, 210, 120, 0.75) 0 3px, transparent 3px 12px);
+  -webkit-mask: linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent), linear-gradient(#000, transparent 85%);
+  -webkit-mask-composite: source-in;
+  mask: linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent), linear-gradient(#000, transparent 85%);
+  mask-composite: intersect;
+  animation: vice-shimmer 3s linear infinite;
+}
+
+@keyframes vice-shimmer {
+  from { background-position: 0 0; }
+  to { background-position: 0 24px; }
+}
+
+.vice-waves {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 16px);
+  animation: vice-shimmer 6s linear infinite;
+}
+
+/* Palmeras en primer plano, meciéndose con la brisa */
+.vice-palm {
+  position: absolute;
+  bottom: -2%;
+  height: 78vh;
+  fill: #0b0318;
+  filter: drop-shadow(0 0 20px rgba(255, 78, 138, 0.25));
+}
+
+.vice-palm--left {
+  left: -6vh;
+}
+
+.vice-palm--right {
+  right: -10vh;
+  height: 62vh;
+  transform: scaleX(-1);
+}
+
+.vice-fronds {
+  transform-origin: 108px 152px;
+  animation: vice-sway 6s ease-in-out infinite alternate;
+}
+
+.vice-palm--right .vice-fronds {
+  animation-duration: 7.5s;
+  animation-delay: -2s;
+}
+
+@keyframes vice-sway {
+  from { transform: rotate(-3deg); }
+  to { transform: rotate(4deg); }
+}
+
+@media (max-width: 768px) {
+  .vice-palm {
+    height: 48vh;
+  }
+
+  .vice-palm--right {
+    height: 38vh;
+  }
+}
