@@ -2,12 +2,20 @@
 
 import { useTheme } from "../../../context/tema";
 import ViceScene from "./vice";
+import YouTubeBackground from "./youtube";
 
 // Sin tema (o en el profesional) va un fondo animado en CSS, sin video que descargar.
 export default function BackgroundVideo() {
   const { theme } = useTheme();
 
-  if (!theme?.video && theme?.scene === "vice") return <ViceScene />;
+  if (!theme?.video && theme?.scene === "vice") {
+    return (
+      <>
+        <ViceScene />
+        {theme.youtube && <YouTubeBackground key={theme.youtube} id={theme.youtube} />}
+      </>
+    );
+  }
 
   if (!theme?.video) {
     return (

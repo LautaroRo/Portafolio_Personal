@@ -380,42 +380,30 @@ body.silenthill-mode .scroll-progress-fill {
   box-shadow: 0 0 8px rgba(139, 16, 16, 0.8);
 }
 
-body.silenthill-mode .switch-btn,
-body.silenthill-mode .triggerButton {
-  background: #000;
-  border-color: #3a3a3a;
+
+
+/* --- Barra de mundos y radio --- */
+body.silenthill-mode {
+  --ui-bg: rgba(0, 0, 0, 0.82);
+  --ui-panel: rgba(6, 6, 6, 0.98);
+  --ui-border: #2e2e2e;
+  --ui-hover: rgba(139, 16, 16, 0.25);
+  --ui-accent: #c21a1a;
+  --ui-accent-text: #fff;
+  --ui-dim: #8a857d;
+  --ui-radius: 2px;
+  --ui-font: "NotoSerif", Georgia, serif;
 }
 
-/* La radio de bolsillo: cruje con estática aunque no suene nada */
-body.silenthill-mode .triggerButton {
+/* La radio de bolsillo cruje con estática */
+body.silenthill-mode .dock-radio:not(.playing) svg {
   animation: sh-static 4s infinite;
 }
 
 @keyframes sh-static {
-  0%, 80%, 100% { translate: 0 0; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); }
-  82% { translate: 2px -1px; box-shadow: 0 0 18px rgba(255, 255, 255, 0.25); }
+  0%, 80%, 100% { translate: 0 0; opacity: 1; }
+  82% { translate: 2px -1px; opacity: 0.6; }
   84% { translate: -2px 1px; }
-  86% { translate: 1px 1px; box-shadow: 0 0 10px rgba(255, 255, 255, 0.15); }
+  86% { translate: 1px 1px; opacity: 0.8; }
   88% { translate: 0 0; }
-}
-
-body.silenthill-mode .playerWindow,
-body.silenthill-mode .theme-menu {
-  border-radius: 0;
-  border-color: #2a2a2a;
-  background: rgba(0, 0, 0, 0.94);
-}
-
-body.silenthill-mode .trackItem {
-  border-radius: 0;
-  background: #0f0f0f;
-}
-
-body.silenthill-mode .trackItem.active {
-  border-color: var(--sh-red);
-}
-
-body.silenthill-mode .progressBar,
-body.silenthill-mode .equalizer i {
-  background: var(--sh-red);
 }

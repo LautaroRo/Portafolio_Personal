@@ -33,7 +33,7 @@ body.tlou-mode :is(h1, h2, h3, .logo, .section-title, .hero-btn, .btn-cta, .btn-
 }
 
 /* Esquinas de HUD: cuatro escuadras finas */
-body.tlou-mode :is(.project-card, .form-success, .playerWindow, .theme-menu) {
+body.tlou-mode :is(.project-card, .form-success) {
   --c: rgba(236, 231, 217, 0.7);
   background:
     linear-gradient(var(--c), var(--c)) top left / 16px 1px no-repeat,
@@ -339,28 +339,6 @@ body.tlou-mode .line.active::before {
   box-shadow: 0 0 10px rgba(242, 193, 78, 0.8);
 }
 
-/* --- Controles --- */
-body.tlou-mode .switch-btn,
-body.tlou-mode .triggerButton {
-  border-radius: 0;
-  background: rgba(12, 16, 11, 0.9);
-  border-color: var(--tl-line);
-}
-
-body.tlou-mode .trackItem {
-  border-radius: 0;
-  background: rgba(0, 0, 0, 0.35);
-}
-
-body.tlou-mode .trackItem.active {
-  border-color: var(--tl-amber);
-}
-
-body.tlou-mode .progressBar,
-body.tlou-mode .equalizer i {
-  background: var(--tl-amber);
-}
-
 @media (max-width: 768px) {
   body.tlou-mode .hero-title {
     font-size: 2.2rem;
@@ -370,9 +348,24 @@ body.tlou-mode .equalizer i {
     font-size: 1.8rem;
   }
 
+  /* Abajo choca con la barra de mundos: en el celular va arriba */
   body.tlou-mode .scroll-progress {
     width: 120px;
-    right: 20px;
-    bottom: 36px;
+    right: 14px;
+    top: 10px;
+    bottom: auto;
   }
+}
+
+
+/* --- Barra de mundos y radio --- */
+body.tlou-mode {
+  --ui-bg: rgba(12, 16, 11, 0.86);
+  --ui-panel: rgba(12, 16, 11, 0.98);
+  --ui-border: rgba(236, 231, 217, 0.18);
+  --ui-hover: rgba(242, 193, 78, 0.12);
+  --ui-accent: #f2c14e;
+  --ui-accent-text: #12160f;
+  --ui-dim: #a3a08f;
+  --ui-radius: 3px;
 }

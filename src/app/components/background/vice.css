@@ -161,3 +161,30 @@
     height: 38vh;
   }
 }
+
+/* --- Video de YouTube de fondo --- */
+.yt-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.yt-bg.is-ready {
+  opacity: 1;
+}
+
+/* Cubre toda la pantalla manteniendo 16:9 y agranda un poco para esconder los bordes del reproductor */
+.yt-bg iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100vw, 177.78vh);
+  height: max(100vh, 56.25vw);
+  translate: -50% -50%;
+  scale: 1.18;
+  border: 0;
+}

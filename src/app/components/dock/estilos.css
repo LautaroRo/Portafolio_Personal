@@ -1,0 +1,598 @@
+/* =========================================================
+   Barra flotante: selector de mundos + radio.
+   Cada tema la viste cambiando estas variables (src/app/temas/).
+   ========================================================= */
+
+body {
+  --ui-bg: rgba(18, 18, 24, 0.78);
+  --ui-panel: rgba(16, 16, 22, 0.98);
+  --ui-border: rgba(255, 255, 255, 0.12);
+  --ui-text: #fff;
+  --ui-dim: rgba(255, 255, 255, 0.58);
+  --ui-hover: rgba(255, 255, 255, 0.08);
+  --ui-accent: #818cf8;
+  --ui-accent-text: #0b0b12;
+  --ui-radius: 18px;
+  --ui-font: inherit;
+  --ui-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+}
+
+.dock {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: var(--ui-font);
+  color: var(--ui-text);
+  text-shadow: none;
+  animation: dock-in 0.6s 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes dock-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+
+.dock * {
+  font-family: inherit;
+}
+
+.dock button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.dock :focus-visible {
+  outline: 2px solid var(--ui-accent);
+  outline-offset: 2px;
+}
+
+/* --- Barra --- */
+.dock-bar {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border);
+  border-radius: calc(var(--ui-radius) + 4px);
+  box-shadow: var(--ui-shadow);
+  backdrop-filter: blur(14px) saturate(1.3);
+}
+
+.dock-world,
+.dock-radio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 12px 0 6px;
+  border-radius: var(--ui-radius);
+  transition: background 0.2s ease;
+}
+
+.dock-world:hover,
+.dock-radio:hover,
+.dock-world.open,
+.dock-radio.open {
+  background: var(--ui-hover);
+}
+
+.dock-world-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: calc(var(--ui-radius) - 6px);
+  background: rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+  animation: dock-icon 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dock-world-icon img {
+  object-fit: contain;
+}
+
+@keyframes dock-icon {
+  from { transform: rotate(-120deg) scale(0.4); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+.dock-world-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+  text-align: left;
+}
+
+.dock-world-text small {
+  font-size: 0.62rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ui-dim);
+}
+
+.dock-world-text strong {
+  font-size: 0.92rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.dock-chevron {
+  color: var(--ui-dim);
+  transition: transform 0.3s ease;
+}
+
+.dock-world.open .dock-chevron {
+  transform: rotate(180deg);
+}
+
+.dock-sep {
+  width: 1px;
+  height: 28px;
+  margin: 0 4px;
+  background: var(--ui-border);
+}
+
+.dock-radio {
+  padding: 0 14px;
+  max-width: 200px;
+}
+
+.dock-radio.playing {
+  color: var(--ui-accent);
+}
+
+.dock-radio-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Invita a probar los mundos mientras se está en el modo base */
+body:not([class*="-mode"]) .dock-world-icon {
+  box-shadow: 0 0 0 0 rgba(129, 140, 248, 0.6);
+  animation: dock-icon 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), dock-hint 2.4s 1.5s ease-out infinite;
+}
+
+@keyframes dock-hint {
+  0% { box-shadow: 0 0 0 0 rgba(129, 140, 248, 0.6); }
+  70%, 100% { box-shadow: 0 0 0 12px rgba(129, 140, 248, 0); }
+}
+
+/* --- Ecualizador --- */
+.dock-eq {
+  width: 16px;
+  height: 14px;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.dock-eq i {
+  flex: 1;
+  border-radius: 1px;
+  background: var(--ui-accent);
+  animation: dock-eq 0.9s ease-in-out infinite;
+}
+
+.dock-eq i:nth-child(2) { animation-delay: -0.45s; }
+.dock-eq i:nth-child(3) { animation-delay: -0.2s; }
+.dock-eq i:nth-child(4) { animation-delay: -0.65s; }
+
+@keyframes dock-eq {
+  0%, 100% { height: 25%; }
+  50% { height: 100%; }
+}
+
+/* --- Paneles --- */
+.dock-panel {
+  width: 340px;
+  max-width: calc(100vw - 40px);
+  padding: 14px;
+  background: var(--ui-panel);
+  border: 1px solid var(--ui-border);
+  border-radius: calc(var(--ui-radius) + 4px);
+  box-shadow: var(--ui-shadow);
+  backdrop-filter: blur(16px) saturate(1.3);
+  transform-origin: bottom left;
+  animation: dock-panel 0.35s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+}
+
+@keyframes dock-panel {
+  from { opacity: 0; transform: translateY(14px) scale(0.92); }
+  to { opacity: 1; transform: none; }
+}
+
+.dock-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-left: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ui-dim);
+}
+
+.dock-icon-btn {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--ui-dim);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.dock-icon-btn:hover {
+  background: var(--ui-hover);
+  color: var(--ui-text);
+}
+
+.dock-icon-btn:active {
+  transform: scale(0.9);
+}
+
+/* --- Tarjetas de mundos --- */
+.dock-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.dock .dock-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-height: 96px;
+  padding: 12px;
+  overflow: hidden;
+  text-align: left;
+  border-radius: var(--ui-radius);
+  background: linear-gradient(135deg, var(--a), var(--b));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  animation: dock-tile 0.4s ease both;
+}
+
+/* Velo para que el texto siempre se lea sobre el color */
+.dock-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.55));
+  pointer-events: none;
+}
+
+.dock-tile > * {
+  position: relative;
+}
+
+@keyframes dock-tile {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+.dock .dock-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3), 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+.dock .dock-tile.active {
+  box-shadow: inset 0 0 0 2px #fff, 0 0 0 3px rgba(255, 255, 255, 0.15);
+}
+
+.dock-tile-icon {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  margin-bottom: auto;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  color: #fff;
+}
+
+.dock-tile-icon img {
+  object-fit: contain;
+}
+
+.dock-tile-name {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.dock-tile-tag {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.dock-tile-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  animation: pop-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* --- Reproductor --- */
+.dock-player-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.dock-cover {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: var(--ui-radius);
+  background: linear-gradient(135deg, var(--a), var(--b));
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.dock-cover img {
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+/* Mientras suena, el ícono gira como un disco */
+.dock-cover.spinning > * {
+  animation: spin 6s linear infinite;
+}
+
+.dock-player-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dock-player-station {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ui-accent);
+}
+
+.dock-player-track {
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dock-progress {
+  position: relative;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.14);
+  cursor: pointer;
+  touch-action: none;
+}
+
+.dock-progress::before {
+  content: "";
+  position: absolute;
+  inset: -8px 0;
+}
+
+.dock-progress-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+  background: var(--ui-accent);
+  transition: width 0.25s linear;
+}
+
+.dock-progress-knob {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  scale: 0;
+  transition: scale 0.2s ease, left 0.25s linear;
+}
+
+.dock-progress:hover .dock-progress-knob,
+.dock-progress:focus-visible .dock-progress-knob {
+  scale: 1;
+}
+
+.dock-times {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ui-dim);
+}
+
+.dock-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin: 6px 0 10px;
+}
+
+.dock-controls .dock-icon-btn {
+  width: 42px;
+  height: 42px;
+  color: var(--ui-text);
+}
+
+.dock .dock-play {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ui-accent);
+  color: var(--ui-accent-text);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease;
+}
+
+.dock .dock-play:hover {
+  transform: scale(1.07);
+  filter: brightness(1.1);
+}
+
+.dock .dock-play:active {
+  transform: scale(0.94);
+}
+
+.dock-play-icon {
+  margin-left: 3px;
+}
+
+.dock-volume {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.dock-volume input {
+  --v: 70%;
+  flex: 1;
+  height: 4px;
+  appearance: none;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--ui-text) var(--v), rgba(255, 255, 255, 0.15) var(--v));
+  cursor: pointer;
+}
+
+.dock-volume input::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.dock-volume input::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.dock-tracks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 8px;
+  border-top: 1px solid var(--ui-border);
+}
+
+.dock-track {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px;
+  border-radius: calc(var(--ui-radius) - 6px);
+  text-align: left;
+  transition: background 0.2s ease;
+}
+
+.dock-track:hover {
+  background: var(--ui-hover);
+}
+
+.dock-track.active {
+  color: var(--ui-accent);
+}
+
+.dock-track-num {
+  width: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  color: var(--ui-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.dock-track-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dock-track-action {
+  display: grid;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.dock-track:hover .dock-track-action,
+.dock-track.active .dock-track-action {
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .dock {
+    left: 12px;
+    bottom: 12px;
+  }
+
+  .dock-panel {
+    width: calc(100vw - 24px);
+    max-width: none;
+  }
+
+  .dock-world-text small {
+    display: none;
+  }
+
+  .dock-radio-text {
+    display: none;
+  }
+
+  .dock-radio {
+    padding: 0 12px;
+  }
+}

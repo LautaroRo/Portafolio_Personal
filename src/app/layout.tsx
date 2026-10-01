@@ -9,11 +9,11 @@ import "./temas/gta.css";
 
 import { SoundtrackProvider } from "../context/soundtrack";
 import { ThemeProvider } from "../context/tema";
-import Radio from "../context/radio";
 import BackgroundVideo from "./components/background";
 import ClickSoundProvider from "./components/clicksound";
 import ScrollProgress from "./components/scrollprogress";
 import ThemeFX from "./components/themefx";
+import Dock from "./components/dock";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -52,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <BackgroundVideo />
               <ThemeFX />
               {children}
-              <Radio />
+              <Dock />
             </ClickSoundProvider>
           </SoundtrackProvider>
         </ThemeProvider>

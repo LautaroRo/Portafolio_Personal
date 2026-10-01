@@ -29,7 +29,7 @@ body.minecraft-mode .page-shell {
 }
 
 /* --- Botones de piedra --- */
-body.minecraft-mode :is(.btn-cta, .hero-btn, .btn-enviar, .btn-action, .btn-whatsapp, .switch-btn, .triggerButton) {
+body.minecraft-mode :is(.btn-cta, .hero-btn, .btn-enviar, .btn-action, .btn-whatsapp) {
   border-radius: 0;
   border: 2px solid #000;
   background: #6f6f6f;
@@ -39,15 +39,14 @@ body.minecraft-mode :is(.btn-cta, .hero-btn, .btn-enviar, .btn-action, .btn-what
   transition: none;
 }
 
-body.minecraft-mode :is(.btn-cta, .hero-btn, .btn-enviar, a.btn-action, .btn-whatsapp, .switch-btn, .triggerButton):hover {
+body.minecraft-mode :is(.btn-cta, .hero-btn, .btn-enviar, a.btn-action, .btn-whatsapp):hover {
   background: #7b86c2;
   color: #ffffa0;
   box-shadow: inset 2px 2px 0 #b3bcf0, inset -2px -3px 0 #4c5690;
   transform: none;
 }
 
-body.minecraft-mode .btn-cta::before,
-body.minecraft-mode .switch-btn::after {
+body.minecraft-mode .btn-cta::before {
   display: none;
 }
 
@@ -392,45 +391,6 @@ body.minecraft-mode .scroll-progress-level {
   text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000;
 }
 
-/* --- Radio y selector --- */
-body.minecraft-mode .switch-btn,
-body.minecraft-mode .triggerButton {
-  border-radius: 0;
-}
-
-body.minecraft-mode .playerWindow,
-body.minecraft-mode .theme-menu {
-  border-radius: 0;
-  border: 2px solid #2d0a63;
-  background: rgba(16, 0, 16, 0.94);
-  box-shadow: 0 0 0 2px #100010;
-}
-
-body.minecraft-mode .trackItem {
-  border-radius: 0;
-  background: var(--mc-slot);
-  box-shadow: inset 2px 2px 0 #373737, inset -2px -2px 0 #fff;
-}
-
-body.minecraft-mode .trackItem.active {
-  border-color: transparent;
-  background: #a9a9a9;
-}
-
-body.minecraft-mode .progressBar,
-body.minecraft-mode .equalizer i {
-  background: #80ff20;
-  border-radius: 0;
-}
-
-body.minecraft-mode .theme-switch .theme-option {
-  border-radius: 0;
-}
-
-body.minecraft-mode .theme-switch .theme-option:hover {
-  background: rgba(123, 134, 194, 0.35);
-}
-
 @media (max-width: 768px) {
   body.minecraft-mode .hero-title {
     font-size: 1.7rem;
@@ -448,8 +408,48 @@ body.minecraft-mode .theme-switch .theme-option:hover {
     display: none;
   }
 
+  /* Abajo choca con la barra de mundos: en el celular va arriba, con el nivel debajo */
   body.minecraft-mode .scroll-progress {
-    bottom: 34px;
-    width: 40vw;
+    top: 8px;
+    bottom: auto;
+    width: 46vw;
   }
+
+  body.minecraft-mode .scroll-progress-level {
+    bottom: auto;
+    top: 10px;
+    font-size: 0.8rem;
+  }
+}
+
+/* --- Barra de mundos y radio: estilo tooltip del juego --- */
+body.minecraft-mode {
+  --ui-bg: rgba(16, 0, 16, 0.9);
+  --ui-panel: #100010;
+  --ui-border: #3a1680;
+  --ui-hover: rgba(123, 134, 194, 0.3);
+  --ui-accent: #80ff20;
+  --ui-accent-text: #102000;
+  --ui-dim: #a8a8a8;
+  --ui-radius: 0px;
+  --ui-font: "MinecraftFont", monospace;
+}
+
+body.minecraft-mode .dock-bar,
+body.minecraft-mode .dock-panel {
+  border-width: 2px;
+  box-shadow: 0 0 0 2px #100010, 6px 6px 0 rgba(0, 0, 0, 0.45);
+}
+
+body.minecraft-mode .dock .dock-tile {
+  box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.35), inset -2px -2px 0 rgba(0, 0, 0, 0.4);
+}
+
+body.minecraft-mode .dock .dock-tile.active {
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+body.minecraft-mode .dock-play,
+body.minecraft-mode .dock-icon-btn {
+  border-radius: 0;
 }

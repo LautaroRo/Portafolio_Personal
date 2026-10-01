@@ -25,7 +25,7 @@ body.redead-mode .page-shell {
   color: var(--rd-text);
 }
 
-body.redead-mode :is(.logo, .nav-links a, .btn-cta, .hero-btn, .btn-enviar, .btn-action, .btn-whatsapp, .section-title, .section-hint, .skill-item, .tag, .theme-option, .playerWindow) {
+body.redead-mode :is(.logo, .nav-links a, .btn-cta, .hero-btn, .btn-enviar, .btn-action, .btn-whatsapp, .section-title, .section-hint, .skill-item, .tag) {
   font-family: "ChineseRocks", Impact, sans-serif;
   text-transform: uppercase;
   font-weight: 400;
@@ -476,33 +476,6 @@ body.redead-mode .scroll-progress-fill {
   box-shadow: none;
 }
 
-body.redead-mode .switch-btn,
-body.redead-mode .triggerButton {
-  background: #1d1712;
-  border-color: #5a4632;
-}
-
-body.redead-mode .playerWindow,
-body.redead-mode .theme-menu {
-  border-radius: 0;
-  border-color: #5a4632;
-  background: rgba(20, 14, 9, 0.96);
-}
-
-body.redead-mode .trackItem {
-  border-radius: 0;
-  background: #2a2018;
-}
-
-body.redead-mode .trackItem.active {
-  border-color: var(--rd-red);
-}
-
-body.redead-mode .progressBar,
-body.redead-mode .equalizer i {
-  background: var(--rd-red);
-}
-
 @media (max-width: 768px) {
   body.redead-mode .info-content {
     padding: 26px 20px 30px;
@@ -524,4 +497,25 @@ body.redead-mode .equalizer i {
   body.redead-mode .section-title::after {
     margin: 0 8px;
   }
+}
+
+
+/* --- Barra de mundos y radio --- */
+body.redead-mode {
+  --ui-bg: rgba(24, 17, 11, 0.9);
+  --ui-panel: rgba(24, 17, 11, 0.98);
+  --ui-border: #5a4632;
+  --ui-hover: rgba(158, 27, 23, 0.25);
+  --ui-accent: #d4473f;
+  --ui-accent-text: #fff;
+  --ui-dim: #b3a58b;
+  --ui-radius: 4px;
+}
+
+body.redead-mode .dock-world-text strong,
+body.redead-mode .dock-tile-name,
+body.redead-mode .dock-player-track {
+  font-family: "ChineseRocks", Impact, sans-serif;
+  font-weight: 400;
+  letter-spacing: 1px;
 }

@@ -8,8 +8,13 @@ export type Theme = {
   title: string;
   icon: string | null;
   playlist: Track[];
-  // Fondo animado propio cuando el tema no tiene video
+  // Fondo animado propio cuando el tema no tiene video (y respaldo mientras carga YouTube)
   scene?: "vice";
+  // Id de un video de YouTube que se incrusta de fondo (se reproduce desde YouTube, no se descarga)
+  youtube?: string;
+  // Frase corta y colores para la tarjeta del selector de mundos
+  tagline: string;
+  swatch: [string, string];
 };
 
 export const THEMES = {
@@ -20,6 +25,8 @@ export const THEMES = {
     bodyClass: "minecraft-mode",
     title: "MINECRAFT OST",
     icon: "/iconos/minecraft_logo.png",
+    tagline: "Bloques y cerezos",
+    swatch: ["#5d9b3a", "#6b4a32"],
     playlist: [
       { title: "Minecraft", file: "/soundtracks/minecraft/Minecraft.mp3" },
       { title: "Sweden", file: "/soundtracks/minecraft/Sweden.mp3" },
@@ -33,6 +40,8 @@ export const THEMES = {
     bodyClass: "silenthill-mode",
     title: "SILENT HILL OST",
     icon: "/iconos/silenthill_logo.png",
+    tagline: "Niebla y estática",
+    swatch: ["#3a3a3a", "#8b1010"],
     playlist: [
       { title: "Laura Plays the Piano", file: "/soundtracks/silenthill/LauraPlaysThePiano.mp3" },
       { title: "Promise", file: "/soundtracks/silenthill/Promise.mp3" },
@@ -46,6 +55,8 @@ export const THEMES = {
     bodyClass: "tlou-mode",
     title: "TLOU OST",
     icon: "/iconos/lastofus_logo.png",
+    tagline: "Esporas y luciérnagas",
+    swatch: ["#2f3d22", "#f2c14e"],
     playlist: [
       { title: "All Gone", file: "/soundtracks/thelastofus/AllGone.mp3" },
       { title: "Allowed to Be Happy", file: "/soundtracks/thelastofus/AllowedToBeHappy.mp3" },
@@ -59,6 +70,8 @@ export const THEMES = {
     bodyClass: "redead-mode",
     title: "RED DEAD OST",
     icon: "/iconos/redead_logo.png",
+    tagline: "El salvaje oeste",
+    swatch: ["#5a3b22", "#9e1b17"],
     playlist: [
       { title: "Moonlight", file: "/soundtracks/reddead/Moonlight.mp3" },
       { title: "That's the Way It Is", file: "/soundtracks/reddead/ThatstheWayItIs.mp3" },
@@ -67,12 +80,14 @@ export const THEMES = {
   },
   gta6: {
     name: "GTA VI",
-    // Para usar un video: dejarlo en public/fondos_img/ y poner acá su ruta.
     video: null,
+    youtube: "6_ohA33V6-A",
     clickSound: null,
     bodyClass: "gta-mode",
     title: "VICE CITY FM",
     icon: "/iconos/gta6_logo.svg",
+    tagline: "Atardecer en Leonida",
+    swatch: ["#ff3e8a", "#ffb347"],
     playlist: [],
     scene: "vice",
   },
@@ -83,6 +98,8 @@ export const THEMES = {
     bodyClass: "pro-mode",
     title: "PROFESIONAL",
     icon: null,
+    tagline: "Limpio y directo",
+    swatch: ["#4f46e5", "#0891b2"],
     playlist: [],
   },
 } satisfies Record<string, Theme>;
