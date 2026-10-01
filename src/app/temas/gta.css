@@ -384,7 +384,7 @@ body.gta-mode {
 
 /* Sobre el video, un velo apenas para que el texto se lea */
 body.gta-mode .page-shell {
-  background: linear-gradient(180deg, rgba(18, 6, 38, 0.35), rgba(18, 6, 38, 0.15) 40%, rgba(18, 6, 38, 0.35));
+  background: linear-gradient(180deg, rgba(18, 6, 38, 0.18), transparent 25%, transparent 70%, rgba(18, 6, 38, 0.25));
 }
 
 /* --- Intro: postal de bienvenida --- */

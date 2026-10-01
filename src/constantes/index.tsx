@@ -1,4 +1,7 @@
-export type Track = { title: string; file: string };
+// Un tema es un MP3 propio (file) o un video oficial de YouTube (youtube)
+export type Track = { title: string; file?: string; youtube?: string };
+
+export const trackKey = (t: Track) => t.file ?? `yt:${t.youtube}`;
 
 export type Theme = {
   name: string;
@@ -24,7 +27,7 @@ export const THEMES = {
     clickSound: "/sonidos/botonMinecraft.mp3",
     bodyClass: "minecraft-mode",
     title: "MINECRAFT OST",
-    icon: "/iconos/minecraft_logo.png",
+    icon: "/iconos/minecraft.svg",
     tagline: "Bloques y cerezos",
     swatch: ["#5d9b3a", "#6b4a32"],
     playlist: [
@@ -39,7 +42,7 @@ export const THEMES = {
     clickSound: "/sonidos/botonSilentHill.mp3",
     bodyClass: "silenthill-mode",
     title: "SILENT HILL OST",
-    icon: "/iconos/silenthill_logo.png",
+    icon: "/iconos/silenthill.svg",
     tagline: "Niebla y estática",
     swatch: ["#3a3a3a", "#8b1010"],
     playlist: [
@@ -54,7 +57,7 @@ export const THEMES = {
     clickSound: "/sonidos/botonTlou.mp3",
     bodyClass: "tlou-mode",
     title: "TLOU OST",
-    icon: "/iconos/lastofus_logo.png",
+    icon: "/iconos/tlou.svg",
     tagline: "Esporas y luciérnagas",
     swatch: ["#2f3d22", "#f2c14e"],
     playlist: [
@@ -69,7 +72,7 @@ export const THEMES = {
     clickSound: "/sonidos/botonRedDead.mp3",
     bodyClass: "redead-mode",
     title: "RED DEAD OST",
-    icon: "/iconos/redead_logo.png",
+    icon: "/iconos/redead.svg",
     tagline: "El salvaje oeste",
     swatch: ["#5a3b22", "#9e1b17"],
     playlist: [
@@ -85,10 +88,15 @@ export const THEMES = {
     clickSound: null,
     bodyClass: "gta-mode",
     title: "VICE CITY FM",
-    icon: "/iconos/gta6_logo.svg",
+    icon: "/iconos/gta6.svg",
     tagline: "Atardecer en Leonida",
     swatch: ["#ff3e8a", "#ffb347"],
-    playlist: [],
+    // Videos oficiales: YouTube no permite reproducir solo el audio, por eso se ven en la radio
+    playlist: [
+      { title: "Love Is a Long Road · Tom Petty", youtube: "xAgUYyosqVM" },
+      { title: "Devil Woman · Cliff Richard", youtube: "CQ9s3nDqSRw" },
+      { title: "Inner Light · Elderbrook & Bob Moses", youtube: "4DPCHufDWJQ" },
+    ],
     scene: "vice",
   },
   profesional: {

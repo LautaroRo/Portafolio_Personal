@@ -53,7 +53,7 @@ function GtaHud() {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const ratio = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
       if (moneyRef.current) moneyRef.current.textContent = Math.round(1000 + ratio * 999000).toLocaleString("en-US");
-      const lit = Math.ceil(ratio * 5);
+      const lit = Math.ceil(ratio * 6);
       starsRef.current?.querySelectorAll("i").forEach((star, i) => star.classList.toggle("on", i < lit));
     };
     const onScroll = () => {
@@ -69,7 +69,9 @@ function GtaHud() {
 
   return (
     <div className="gta-hud" aria-hidden>
+      {/* GTA VI tiene seis estrellas de búsqueda */}
       <div ref={starsRef} className="gta-stars">
+        <i />
         <i />
         <i />
         <i />

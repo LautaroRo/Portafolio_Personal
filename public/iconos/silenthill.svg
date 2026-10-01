@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="niebla" cx="50%" cy="40%" r="70%">
+      <stop offset="0" stop-color="#9a9a96"/>
+      <stop offset="1" stop-color="#2a2a2a"/>
+    </radialGradient>
+    <linearGradient id="oxido" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9c3a1c"/>
+      <stop offset="0.6" stop-color="#6e1f10"/>
+      <stop offset="1" stop-color="#3d0d07"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="url(#niebla)"/>
+  <!-- Casco piramidal oxidado entre la niebla -->
+  <path d="M32 8 L54 46 L10 46 Z" fill="url(#oxido)"/>
+  <path d="M32 8 L54 46 L32 46 Z" fill="#000" opacity="0.25"/>
+  <g stroke="#1a0503" stroke-width="1.6" stroke-linecap="round">
+    <line x1="18" y1="40" x2="46" y2="40"/>
+    <line x1="21" y1="35" x2="43" y2="35"/>
+    <line x1="24" y1="30" x2="40" y2="30"/>
+  </g>
+  <!-- Hombros -->
+  <path d="M8 64 C10 52 20 47 32 47 C44 47 54 52 56 64 Z" fill="#2b2420"/>
+  <!-- Banco de niebla -->
+  <rect y="50" width="64" height="14" fill="#cfcfca" opacity="0.35"/>
+</svg>

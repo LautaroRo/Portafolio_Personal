@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="atardecer" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e9b26a"/>
+      <stop offset="0.6" stop-color="#c0602a"/>
+      <stop offset="1" stop-color="#7a2a14"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="url(#atardecer)"/>
+  <!-- Sol bajo en el horizonte -->
+  <circle cx="32" cy="44" r="13" fill="#f6d79a" opacity="0.8"/>
+  <!-- Sombrero de vaquero -->
+  <path d="M6 40 C12 46 52 46 58 40 C54 44 44 46 32 46 C20 46 10 44 6 40 Z" fill="#1e140c"/>
+  <path d="M8 39 C16 43 48 43 56 39 C52 35 44 37 42 37 L40 22 C39 17 35 16 32 19 C29 16 25 17 24 22 L22 37 C20 37 12 35 8 39 Z" fill="#2b1d12"/>
+  <!-- Cinta roja -->
+  <path d="M22.5 33 C28 34.5 36 34.5 41.5 33 L42 37 C36 38.4 28 38.4 22 37 Z" fill="#a3201b"/>
+  <!-- Pañuelo rojo -->
+  <path d="M18 48 L46 48 L32 62 Z" fill="#a3201b"/>
+  <path d="M18 48 L46 48 L44 51 L20 51 Z" fill="#7a1612"/>
+</svg>

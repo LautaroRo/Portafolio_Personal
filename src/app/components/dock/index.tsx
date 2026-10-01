@@ -5,7 +5,8 @@ import { CSSProperties, PointerEvent, useEffect, useRef, useState } from "react"
 import { Briefcase, Check, ChevronUp, Music, Pause, Play, SkipBack, SkipForward, Volume1, Volume2, VolumeX, X } from "lucide-react";
 import { useTheme } from "../../../context/tema";
 import { useSoundtrack } from "../../../context/soundtrack";
-import { THEMES, THEME_IDS, Theme } from "../../../constantes";
+import { THEMES, THEME_IDS, Theme, trackKey } from "../../../constantes";
+import YouTubeRadio from "./youtube-radio";
 import "./estilos.css";
 
 type Panel = "mundos" | "radio" | null;
@@ -40,7 +41,8 @@ export default function Dock() {
   const rootRef = useRef<HTMLDivElement>(null);
 
   const playlist = theme?.playlist ?? [];
-  const pista = playlist.find((t) => t.file === radio.currentTrack) ?? null;
+  const pista = playlist.find((t) => trackKey(t) === radio.currentTrack) ?? null;
+  const conVideo = playlist.some((t) => t.youtube);
   const actual = theme ?? THEMES.profesional;
 
   // Si el mundo nuevo no tiene radio, se cierra el reproductor
@@ -114,7 +116,7 @@ export default function Dock() {
       )}
 
       {panelVisible === "radio" && (
-        <div className="dock-panel dock-player" role="dialog" aria-label={actual.title}>
+        <div className={`dock-panel dock-player ${conVideo ? "has-video" : ""}`} role="dialog" aria-label={actual.title}>
           <div className="dock-player-top">
             <span
               className={`dock-cover ${radio.isPlaying ? "spinning" : ""}`}
@@ -130,6 +132,13 @@ export default function Dock() {
               <X size={16} />
             </button>
           </div>
+
+          {conVideo && (
+            <>
+              <YouTubeRadio />
+              <p className="dock-video-note">Videos oficiales vía YouTube · suenan con la radio abierta</p>
+            </>
+          )}
 
           <div
             className="dock-progress"
@@ -188,13 +197,14 @@ export default function Dock() {
 
           <ul className="dock-tracks">
             {playlist.map((track, i) => {
-              const esta = radio.currentTrack === track.file;
+              const key = trackKey(track);
+              const esta = radio.currentTrack === key;
               return (
-                <li key={track.file}>
+                <li key={key}>
                   <button
                     type="button"
                     className={`dock-track ${esta ? "active" : ""}`}
-                    onClick={() => (esta ? radio.togglePlay() : radio.playTrack(track.file))}
+                    onClick={() => (esta ? radio.togglePlay() : radio.playTrack(key))}
                   >
                     <span className="dock-track-num">{esta && radio.isPlaying ? <Ecualizador /> : i + 1}</span>
                     <span className="dock-track-title">{track.title}</span>

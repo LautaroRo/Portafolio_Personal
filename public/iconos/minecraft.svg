@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="crispEdges">
+  <!-- Bloque de pasto en isométrica -->
+  <polygon points="32,6 58,19 32,32 6,19" fill="#6aaa3a"/>
+  <polygon points="32,6 45,12.5 32,19 19,12.5" fill="#7cc04a"/>
+  <polygon points="6,19 32,32 32,58 6,45" fill="#8a5a36"/>
+  <polygon points="58,19 32,32 32,58 58,45" fill="#6b4428"/>
+  <!-- Pasto que cae por los costados -->
+  <polygon points="6,19 32,32 32,38 26,35 26,39 20,36 20,32 13,28.5 13,31 6,27.5" fill="#5b9a2e"/>
+  <polygon points="58,19 32,32 32,38 38,35 38,40 44,37 44,32 51,28.5 51,32 58,28.5" fill="#4b8226"/>
+  <!-- Pixeles de tierra -->
+  <g fill="#a0703f">
+    <rect x="11" y="36" width="3" height="3"/>
+    <rect x="19" y="44" width="3" height="3"/>
+    <rect x="25" y="41" width="2" height="2"/>
+    <rect x="14" y="44" width="2" height="2"/>
+  </g>
+  <g fill="#4f3220">
+    <rect x="40" y="46" width="3" height="3"/>
+    <rect x="48" y="38" width="3" height="3"/>
+    <rect x="36" y="50" width="2" height="2"/>
+    <rect x="52" y="44" width="2" height="2"/>
+  </g>
+  <g fill="#8fd35a">
+    <rect x="26" y="13" width="3" height="2"/>
+    <rect x="38" y="17" width="3" height="2"/>
+    <rect x="31" y="22" width="2" height="2"/>
+  </g>
+</svg>

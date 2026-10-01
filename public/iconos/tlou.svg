@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="fondo" cx="50%" cy="60%" r="70%">
+      <stop offset="0" stop-color="#2f3d22"/>
+      <stop offset="1" stop-color="#0d120a"/>
+    </radialGradient>
+    <radialGradient id="luz" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fff6b0"/>
+      <stop offset="0.35" stop-color="#f2c14e" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#f2c14e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="url(#fondo)"/>
+  <!-- Enredadera de la ciudad abandonada -->
+  <path d="M4 58 C14 50 12 40 22 36 M60 10 C52 16 54 24 46 28" stroke="#4d6b2e" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <!-- Resplandor -->
+  <circle cx="32" cy="38" r="20" fill="url(#luz)"/>
+  <!-- Luciérnaga: alas, cuerpo y cola encendida -->
+  <ellipse cx="24" cy="24" rx="9" ry="5" transform="rotate(-35 24 24)" fill="#e9e4d4" opacity="0.75"/>
+  <ellipse cx="40" cy="24" rx="9" ry="5" transform="rotate(35 40 24)" fill="#e9e4d4" opacity="0.75"/>
+  <ellipse cx="32" cy="24" rx="4" ry="6" fill="#1e1a14"/>
+  <circle cx="32" cy="16.5" r="3" fill="#1e1a14"/>
+  <path d="M30 14 L26 9 M34 14 L38 9" stroke="#1e1a14" stroke-width="1.4" stroke-linecap="round"/>
+  <ellipse cx="32" cy="36" rx="5" ry="7.5" fill="#fff3a0"/>
+</svg>
