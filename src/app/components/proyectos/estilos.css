@@ -96,7 +96,8 @@
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.project-card:hover .tag {
+/* Solo en el modo normal: los mundos tienen etiquetas propias (en Red Dead quedaban ilegibles) */
+body:is(:not([class*="-mode"]), .pro-mode) .project-card:hover .tag {
   background: #2c2c2c;
 }
 
