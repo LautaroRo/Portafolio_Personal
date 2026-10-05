@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { Download } from "lucide-react";
+import { CV_PDF } from "../../../constantes";
 import { useTextos, useTheme } from "../../../context/tema";
 import Typewriter from "./typewriter";
 import "./estilos.css";
@@ -84,6 +86,9 @@ export default function Info() {
           </a>
           <a href="#contacto" className="hero-btn">
             {t["hero.secondary"]}
+          </a>
+          <a href={CV_PDF} download className="hero-btn hero-btn--cv" title="CV en PDF">
+            <Download size={17} aria-hidden /> {t["hero.cv"]}
           </a>
         </div>
       </div>

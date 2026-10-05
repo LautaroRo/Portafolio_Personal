@@ -263,3 +263,20 @@
     font-size: 1.7rem;
   }
 }
+
+/* Botón del CV: hereda el estilo de .hero-btn de cada mundo; solo suma el ícono */
+.hero-btn--cv {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.hero-btn--cv svg {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.hero-btn--cv:hover svg {
+  transform: translateY(2px);
+}

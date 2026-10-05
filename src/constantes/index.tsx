@@ -118,3 +118,6 @@ export const isThemeId = (value: unknown): value is ThemeId =>
   typeof value === "string" && value in THEMES;
 
 export const getTheme = (id: ThemeId | null): Theme | null => (id ? THEMES[id] : null);
+
+// CV para descargar. La fuente es cv/cv.html (en la raíz del repo); el PDF se regenera desde ahí.
+export const CV_PDF = "/cv/CV-Lautaro-Rodriguez.pdf";

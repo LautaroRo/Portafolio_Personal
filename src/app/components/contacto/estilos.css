@@ -195,3 +195,13 @@
     padding: 14px;
   }
 }
+
+.cv-pregunta {
+  margin: 26px 0 14px;
+}
+
+@media (max-width: 768px) {
+  .whatsapp-container .hero-btn--cv {
+    width: 100%;
+  }
+}
