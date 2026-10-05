@@ -442,32 +442,10 @@ body.gta-mode .page-shell {
 
   body.gta-mode .navbar {
     padding-right: 0;
-    padding-top: 70px;
   }
 
-  /* En el celular el HUD es una pastilla compacta: estrellas y plata en una fila */
+  /* En el celular no hay un lugar libre para el HUD: arriba tapaba los títulos y abajo los botones */
   .gta-hud {
-    top: 10px;
-    right: 10px;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-    padding: 5px 10px;
-    border-radius: 999px;
-    background: rgba(26, 8, 54, 0.7);
-    backdrop-filter: blur(8px);
-  }
-
-  .gta-money {
-    font-size: 1.05rem;
-  }
-
-  .gta-stars {
-    gap: 2px;
-  }
-
-  .gta-stars i {
-    width: 11px;
-    height: 11px;
+    display: none;
   }
 }

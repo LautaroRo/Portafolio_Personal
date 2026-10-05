@@ -97,6 +97,9 @@ export default function Dock() {
                   onClick={() => {
                     setThemeId(id);
                     setPanel(null);
+                    // Cada mundo arranca desde arriba, en el inicio
+                    const suave = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                    window.scrollTo({ top: 0, behavior: suave ? "smooth" : "auto" });
                   }}
                 >
                   <span className="dock-tile-icon">

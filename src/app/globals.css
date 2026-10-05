@@ -123,8 +123,9 @@ body.theme-switching .page-shell {
   animation: theme-swap 0.6s ease;
 }
 
+/* Leve, para acompañar el cambio: más fuerte, el contenido parecía apagarse en negro */
 @keyframes theme-swap {
-  from { opacity: 0.2; filter: blur(8px); }
+  from { opacity: 0.55; filter: blur(3px); }
   to { opacity: 1; filter: none; }
 }
 
@@ -140,9 +141,24 @@ body.theme-switching .page-shell {
   animation: video-in 1.2s ease both;
 }
 
+/* Entrada del fondo: solo un leve acercamiento. La aparición la maneja la capa (.bg-capa) */
 @keyframes video-in {
-  from { opacity: 0; transform: scale(1.06); }
-  to { opacity: 1; transform: none; }
+  from { transform: scale(1.06); }
+  to { transform: none; }
+}
+
+/* Capas de fondo: la nueva aparece encima de la anterior recién cuando está lista (ver background/index.tsx) */
+.bg-capa {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+
+.bg-capa.is-lista {
+  opacity: 1;
 }
 
 /* Fondo animado cuando no hay video (inicio y tema profesional) */
