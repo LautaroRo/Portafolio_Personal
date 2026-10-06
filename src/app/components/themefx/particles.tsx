@@ -41,7 +41,12 @@ export default function Particles({ kind }: { kind: ParticleKind }) {
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
 
-    const cfg = CONFIG[kind];
+    // En el celular: la mitad de partículas, sin brillo (shadowBlur es lo más caro de dibujar),
+    // a densidad 1 y a 30 cuadros por segundo. Flotan despacio: la diferencia no se nota.
+    const liviano = window.matchMedia("(pointer: coarse), (max-width: 768px)").matches;
+    const base = CONFIG[kind];
+    const cfg = liviano ? { ...base, max: Math.round(base.max / 2), density: base.density / 2, glow: false } : base;
+    const intervalo = liviano ? 1000 / 30 : 0;
     let w = 0;
     let h = 0;
     let parts: P[] = [];
@@ -60,7 +65,7 @@ export default function Particles({ kind }: { kind: ParticleKind }) {
     });
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = liviano ? 1 : Math.min(window.devicePixelRatio || 1, 2);
       w = window.innerWidth;
       h = window.innerHeight;
       canvas.width = w * dpr;
@@ -72,6 +77,10 @@ export default function Particles({ kind }: { kind: ParticleKind }) {
     };
 
     const tick = (now: number) => {
+      if (intervalo && now - last < intervalo) {
+        frame = requestAnimationFrame(tick);
+        return;
+      }
       const dt = Math.min((now - last) / 16.67, 3);
       last = now;
       ctx.clearRect(0, 0, w, h);

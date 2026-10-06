@@ -6,6 +6,8 @@ import "./temas/silenthill.css";
 import "./temas/tlou.css";
 import "./temas/redead.css";
 import "./temas/gta.css";
+// Último: ajustes de rendimiento y legibilidad para el celular, por encima de cada mundo
+import "./celular.css";
 
 import { SoundtrackProvider } from "../context/soundtrack";
 import { ThemeProvider } from "../context/tema";

@@ -1,0 +1,152 @@
+/* =========================================================
+   Celular: rendimiento y legibilidad
+   Se importa al final de layout.tsx para pisar lo de cada mundo.
+   En compu nada de esto aplica.
+   ========================================================= */
+
+/* --- Rendimiento: pantallas táctiles --- */
+@media (pointer: coarse), (max-width: 768px) {
+  /* El grano de película era una capa nueve veces más grande que la pantalla, moviéndose sin parar:
+     en un celular de alta densidad son cientos de MB de memoria de video y trababa todo el scroll */
+  .fx-grain {
+    display: none;
+  }
+
+  /* La linterna sigue al mouse: en el celular quedaba fija y oscurecía el menú y el inicio */
+  .fx-flashlight {
+    display: none;
+  }
+
+  /* La niebla ya es un degradé suave: el desenfoque encima se recalculaba en cada cuadro */
+  .fx-fog span {
+    filter: none;
+  }
+
+  /* Desenfocar lo que hay detrás de cada etiqueta y tarjeta, con un video corriendo abajo,
+     se recalcula en cada cuadro del scroll. Se reemplaza por un fondo un poco más opaco. */
+  .skill-item,
+  body.gta-mode .project-card,
+  body.tlou-mode :is(.project-card, .form-success) {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .skill-item {
+    background-color: rgba(10, 10, 14, 0.55);
+  }
+
+  body.gta-mode .project-card {
+    background-color: rgba(26, 8, 54, 0.82);
+  }
+
+  body.tlou-mode :is(.project-card, .form-success) {
+    --tl-panel: rgba(12, 16, 11, 0.88);
+  }
+
+  /* El pulso al cambiar de mundo desenfocaba la página entera: alcanza con la opacidad */
+  body.theme-switching .page-shell {
+    animation-name: theme-swap-liviano;
+  }
+}
+
+@keyframes mc-splash-celular {
+  from { transform: rotate(-4deg) scale(1); }
+  to { transform: rotate(-4deg) scale(1.08); }
+}
+
+@keyframes theme-swap-liviano {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+/* --- Legibilidad y solapamientos --- */
+@media (max-width: 768px) {
+  /* Las rayitas de secciones a la derecha se montaban sobre el texto; para navegar está la barra de abajo */
+  .scroll-indicator {
+    display: none;
+  }
+
+  /* Barra de lectura: siempre una línea fina arriba de todo. En Minecraft y The Last of Us
+     era una barra gruesa con número que tapaba los títulos al scrollear. */
+  body.minecraft-mode .scroll-progress,
+  body.tlou-mode .scroll-progress {
+    inset: 0 0 auto 0;
+    top: 0;
+    bottom: auto;
+    width: auto;
+    height: 4px;
+    translate: none;
+    border: 0;
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  body.minecraft-mode .scroll-progress-level {
+    display: none;
+  }
+
+  /* Minecraft: la frase amarilla va debajo del saludo, no encima de "Lautaro".
+     Late igual que en el juego, pero apenas inclinada (la animación original la giraba 18°) */
+  body.minecraft-mode .mc-splash {
+    position: static;
+    display: block;
+    margin: 10px auto 0;
+    font-size: 0.8rem;
+    animation-name: mc-splash-celular;
+  }
+
+  /* Silent Hill: sin la linterna, el texto gris quedaba sobre la niebla gris del video */
+  body.silenthill-mode :is(.nav-links a, .hero-kicker, .hero-role, .hero-bio, .section-hint) {
+    color: #e4e2de;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 14px rgba(0, 0, 0, 0.75);
+  }
+
+  /* Los cuatro links del menú en un solo renglón */
+  .nav-links {
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .nav-links a {
+    padding: 10px 0;
+    white-space: nowrap;
+  }
+
+  body.minecraft-mode .nav-links {
+    gap: 10px;
+  }
+
+  body.minecraft-mode .nav-links a {
+    font-size: 0.78rem;
+  }
+}
+
+/* --- Pantallas táctiles: sin efectos de "pasar el mouse" pegados ---
+   Al tocar, el navegador del celular deja el :hover activo hasta tocar otra cosa:
+   la tarjeta quedaba levantada o el botón iluminado. Se anula el movimiento y el brillo. */
+@media (hover: none) {
+  :is(.project-card, .skill-item, .hero-btn, .btn-cta, .btn-enviar, .btn-whatsapp, .btn-action, .tag, .avatar, .logo, .dock-tile):hover {
+    transform: none !important;
+    translate: none !important;
+    rotate: none !important;
+    scale: none !important;
+  }
+
+  .project-card:hover,
+  .skill-item:hover {
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Red Dead: la letra del oeste es ancha; los cuatro links juntos no entraban y se perdían sobre el cielo */
+  body.redead-mode .nav-links {
+    gap: 10px;
+  }
+
+  body.redead-mode .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 12px rgba(0, 0, 0, 0.7);
+  }
+}
