@@ -7,42 +7,38 @@ import ViceScene from "./vice";
 import YouTubeBackground from "./youtube";
 
 // Cada fondo es una "capa". Al cambiar de mundo, la capa nueva se monta encima y recién se ve
-// cuando está lista (el video ya tiene un fotograma); mientras tanto sigue la anterior.
-// Así nunca queda un instante en negro entre un mundo y otro.
-// lista = ya tiene imagen y empieza a aparecer; completa = terminó de aparecer (tapa todo lo de abajo)
-type Capa = { clave: string; themeId: ThemeId | null; lista: boolean; completa: boolean };
+// cuando tiene imagen; mientras tanto sigue la anterior. Cuando terminó de aparecer, las de abajo
+// se desmontan. Así nunca queda un instante en negro entre un mundo y otro.
+//
+// Cada capa maneja sola si está lista: el padre solo guarda la lista de capas. Antes ese estado
+// vivía en el padre y, con el celular cargado, React podía rehacer la lista desde una versión
+// vieja: la capa nueva perdía la marca de "lista" y quedaba invisible (fondo viejo o negro).
+type Capa = { id: string; themeId: ThemeId | null; n: number };
 
-const claveDe = (id: ThemeId | null) => id ?? "base";
 // Primer cuadro de cada video (public/fondos_img/*-poster.jpg): se ve al instante mientras el video
 // carga, y queda de fondo si el celular no lo reproduce solo (iPhone en ahorro de batería)
 const posterDe = (video: string) => video.replace(/\.mp4$/, "-poster.jpg");
 
 function Fondo({ themeId, onLista }: { themeId: ThemeId | null; onLista: () => void }) {
   const theme = getTheme(themeId);
-  const avisado = useRef(false);
-  const avisar = useCallback(() => {
-    if (avisado.current) return;
-    avisado.current = true;
-    onLista();
-  }, [onLista]);
+  const video = theme?.video ?? null;
 
   // Las escenas hechas con CSS están listas apenas se dibujan; un video, cuando cargó su imagen fija
-  const video = theme?.video ?? null;
   useEffect(() => {
     if (!video) {
-      const raf = requestAnimationFrame(avisar);
+      const raf = requestAnimationFrame(onLista);
       return () => cancelAnimationFrame(raf);
     }
     const img = new Image();
-    img.onload = avisar;
+    img.onload = onLista;
     img.src = posterDe(video);
     // Si hasta la imagen tarda demasiado (conexión muy lenta), igual se muestra
-    const t = window.setTimeout(avisar, 4000);
+    const t = window.setTimeout(onLista, 4000);
     return () => {
       img.onload = null;
       window.clearTimeout(t);
     };
-  }, [video, avisar]);
+  }, [video, onLista]);
 
   if (video) {
     return (
@@ -56,7 +52,7 @@ function Fondo({ themeId, onLista }: { themeId: ThemeId | null; onLista: () => v
         preload="auto"
         aria-hidden
         className="global-bg-video"
-        onLoadedData={avisar}
+        onLoadedData={onLista}
       />
     );
   }
@@ -80,47 +76,63 @@ function Fondo({ themeId, onLista }: { themeId: ThemeId | null; onLista: () => v
   );
 }
 
+function CapaFondo({ capa, inicial, onCompleta }: { capa: Capa; inicial: boolean; onCompleta: (id: string) => void }) {
+  // La primera capa de la página se ve de entrada; las que llegan después, cuando están listas
+  const [lista, setLista] = useState(inicial);
+  const completada = useRef(false);
+
+  const completar = useCallback(() => {
+    if (completada.current) return;
+    completada.current = true;
+    onCompleta(capa.id);
+  }, [onCompleta, capa.id]);
+
+  const marcarLista = useCallback(() => setLista(true), []);
+
+  // Respaldo: con las animaciones desactivadas el navegador no avisa el final del fundido
+  useEffect(() => {
+    if (!lista) return;
+    const t = window.setTimeout(completar, 1500);
+    return () => window.clearTimeout(t);
+  }, [lista, completar]);
+
+  return (
+    <div
+      className={`bg-capa ${lista ? "is-lista" : ""}`}
+      aria-hidden
+      onTransitionEnd={(e) => {
+        if (lista && e.target === e.currentTarget && e.propertyName === "opacity") completar();
+      }}
+    >
+      <Fondo themeId={capa.themeId} onLista={marcarLista} />
+    </div>
+  );
+}
+
 export default function BackgroundVideo() {
   const { themeId } = useTheme();
-  const [capas, setCapas] = useState<Capa[]>(() => [{ clave: claveDe(themeId), themeId, lista: true, completa: true }]);
+  const [capas, setCapas] = useState<Capa[]>(() => [{ id: `${themeId ?? "base"}-0`, themeId, n: 0 }]);
 
-  // Cambió el mundo: la capa nueva va arriba de la última que ya se veía entera.
-  // Si se cambia rápido varias veces, las intermedias a medio aparecer se descartan.
-  const clave = claveDe(themeId);
-  if (capas[capas.length - 1].clave !== clave) {
-    const base = capas.filter((c) => c.completa && c.clave !== clave).slice(-1);
-    setCapas([...base, { clave, themeId, lista: false, completa: false }]);
+  // Cambió el mundo: se suma una capa nueva arriba. El id es único (lleva un número de orden), así
+  // volver a un mundo cuya capa todavía no se retiró monta una nueva en vez de reusar la vieja.
+  const ultima = capas[capas.length - 1];
+  if (ultima.themeId !== themeId) {
+    const n = ultima.n + 1;
+    setCapas([...capas, { id: `${themeId ?? "base"}-${n}`, themeId, n }]);
   }
 
-  // Recién cuando la capa nueva terminó de aparecer se desmontan las de abajo (y sus videos dejan de bajar)
-  const marcarCompleta = useCallback((c: string) => {
+  // La capa terminó de aparecer: todo lo de abajo ya no se ve, se desmonta (y sus videos dejan de bajar)
+  const alCompletar = useCallback((id: string) => {
     setCapas((cs) => {
-      const i = cs.findIndex((x) => x.clave === c);
-      if (i < 0 || !cs[i].lista || (i === 0 && cs[0].completa)) return cs;
-      return cs.slice(i).map((x, j) => (j === 0 ? { ...x, completa: true } : x));
+      const i = cs.findIndex((c) => c.id === id);
+      return i > 0 ? cs.slice(i) : cs;
     });
   }, []);
 
-  const marcarLista = useCallback(
-    (c: string) => {
-      setCapas((cs) => cs.map((x) => (x.clave === c ? { ...x, lista: true } : x)));
-      // Respaldo: con las animaciones desactivadas el navegador no avisa el final del fundido
-      window.setTimeout(() => marcarCompleta(c), 1500);
-    },
-    [marcarCompleta],
-  );
-
   return (
     <>
-      {capas.map((c) => (
-        <div
-          key={c.clave}
-          className={`bg-capa ${c.lista ? "is-lista" : ""}`}
-          aria-hidden
-          onTransitionEnd={(e) => e.target === e.currentTarget && e.propertyName === "opacity" && c.lista && marcarCompleta(c.clave)}
-        >
-          <Fondo themeId={c.themeId} onLista={() => marcarLista(c.clave)} />
-        </div>
+      {capas.map((c, i) => (
+        <CapaFondo key={c.id} capa={c} inicial={i === 0 && c.n === 0} onCompleta={alCompletar} />
       ))}
     </>
   );
